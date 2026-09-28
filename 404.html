@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>404 · Lost in space · Zhi Guo</title>
+  <meta name="robots" content="noindex" />
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=JetBrains+Mono:wght@400;600&family=Space+Grotesk:wght@400;500;700&display=swap" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <style>
+    .lost { min-height: 100vh; display: grid; place-items: center; text-align: center; padding: 40px 20px; }
+    .lost .cat { width: 150px; height: 120px; margin: 0 auto; animation: drift 6s ease-in-out infinite; filter: drop-shadow(0 10px 30px rgba(62, 247, 255, .35)); }
+    .lost h1 { margin: 20px 0 0; }
+    .lost p { margin: 12px auto 0; max-width: 460px; color: var(--muted); }
+    .lost .btn { margin-top: 30px; }
+    @keyframes drift { 0%, 100% { transform: translate(0, 0) rotate(-8deg); } 50% { transform: translate(14px, -18px) rotate(10deg); } }
+  </style>
+</head>
+<body>
+  <div class="nebula" aria-hidden="true"><i></i><i></i><i></i></div>
+  <canvas id="starfield" aria-hidden="true"></canvas>
+  <canvas id="fx" aria-hidden="true"></canvas>
+  <main class="lost">
+    <div>
+      <svg class="cat" viewBox="4 0 112 90" aria-hidden="true">
+        <line x1="60" y1="22" x2="60" y2="9" stroke="#170d33" stroke-width="3.5"/>
+        <circle cx="60" cy="8" r="6" fill="#ffe45e" stroke="#170d33" stroke-width="3"/>
+        <path d="M24 42 L28 12 L52 28 Z" fill="#f4f1ff" stroke="#170d33" stroke-width="3.5" stroke-linejoin="round"/>
+        <path d="M30 35 L32 21 L43 28 Z" fill="#ff9fd6"/>
+        <path d="M96 42 L92 12 L68 28 Z" fill="#f4f1ff" stroke="#170d33" stroke-width="3.5" stroke-linejoin="round"/>
+        <path d="M90 35 L88 21 L77 28 Z" fill="#ff9fd6"/>
+        <rect x="16" y="22" width="88" height="64" rx="30" fill="#f4f1ff" stroke="#170d33" stroke-width="3.5"/>
+        <rect x="28" y="35" width="64" height="38" rx="17" fill="#170d33"/>
+        <g fill="none" stroke="#3ef7ff" stroke-width="3.2" stroke-linecap="round">
+          <path d="M40 48 l9 9 M49 48 l-9 9"/><path d="M71 48 l9 9 M80 48 l-9 9"/>
+        </g>
+        <path d="M54 66 q6 -5 12 0" fill="none" stroke="#3ef7ff" stroke-width="2.6" stroke-linecap="round"/>
+      </svg>
+      <h1 class="glitch is-glitching" data-text="404">404</h1>
+      <p>This page drifted into a black hole. Byte looked everywhere, even behind the event horizon.</p>
+      <p>这个页面掉进黑洞了，Byte 连事件视界后面都找过了。</p>
+      <a class="btn btn-neon" href="/">🚀 Back to base · 返回主页</a>
+    </div>
+  </main>
+  <script src="/js/fx.js"></script>
+  <script>
+    (function () {
+      var h = document.querySelector(".glitch");
+      setInterval(function () { h.classList.remove("is-glitching"); void h.offsetWidth; h.classList.add("is-glitching"); }, 2600);
+    })();
+  </script>
+</body>
+</html>

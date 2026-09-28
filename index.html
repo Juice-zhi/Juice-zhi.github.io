@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Zhi Guo 郭智 (Juice) · Gameplay × Graphics × Computational Imaging</title>
+  <meta name="description" content="Zhi Guo (a.k.a. Juice): M.S. CS student at UW–Madison and former game client developer at Tencent LightSpeed Studios (Game for Peace). Gameplay systems, real-time graphics, neural volumetric rendering and computational imaging." />
+  <meta name="author" content="Zhi Guo (郭智)" />
+  <meta name="theme-color" content="#0a0620" />
+  <link rel="canonical" href="https://juice-zhi.github.io/" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://juice-zhi.github.io/" />
+  <meta property="og:title" content="Zhi Guo 郭智 (Juice) · Player 01" />
+  <meta property="og:description" content="Game client dev turned computational imaging researcher. Vehicles for 40M daily players, photons one at a time." />
+  <meta property="og:image" content="https://juice-zhi.github.io/assets/og.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <script>
+    document.documentElement.classList.add("js");
+    // safety net: never leave the hero hidden if a script fails to load
+    setTimeout(function () { document.body && document.body.classList.add("booted"); }, 4500);
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- non-blocking font load: the page still renders instantly if Google Fonts is slow or blocked -->
+  <link rel="stylesheet" media="print" onload="this.media='all'"
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=JetBrains+Mono:wght@400;600&family=Press+Start+2P&family=Space+Grotesk:wght@400;500;700&family=ZCOOL+KuaiLe&display=swap" />
+  <link rel="stylesheet" href="css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Zhi Guo",
+    "alternateName": ["郭智", "Juice"],
+    "url": "https://juice-zhi.github.io/",
+    "image": "https://juice-zhi.github.io/assets/avatar.jpg",
+    "jobTitle": "M.S. Computer Science Student",
+    "affiliation": { "@type": "CollegeOrUniversity", "name": "University of Wisconsin–Madison" },
+    "alumniOf": [
+      { "@type": "CollegeOrUniversity", "name": "Hong Kong University of Science and Technology" },
+      { "@type": "CollegeOrUniversity", "name": "University of Utah" }
+    ],
+    "sameAs": ["https://github.com/Juice-zhi", "https://www.linkedin.com/in/zhi-guo-418296225"]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip" href="#about">Skip to content</a>
+
+  <!-- ================= SVG sprite ================= -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="i-github" viewBox="0 0 16 16"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></symbol>
+      <symbol id="i-linkedin" viewBox="0 0 24 24"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></symbol>
+      <symbol id="i-mail" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></g></symbol>
+      <symbol id="i-copy" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></g></symbol>
+      <symbol id="i-menu" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h10"/></g></symbol>
+
+      <!-- Byte the robo-cat (head only) -->
+      <symbol id="cat-head" viewBox="4 0 112 90">
+        <line x1="60" y1="22" x2="60" y2="9" stroke="#170d33" stroke-width="3.5"/>
+        <circle cx="60" cy="8" r="6" fill="#ffe45e" stroke="#170d33" stroke-width="3"/>
+        <path d="M24 42 L28 12 L52 28 Z" fill="#f4f1ff" stroke="#170d33" stroke-width="3.5" stroke-linejoin="round"/>
+        <path d="M30 35 L32 21 L43 28 Z" fill="#ff9fd6"/>
+        <path d="M96 42 L92 12 L68 28 Z" fill="#f4f1ff" stroke="#170d33" stroke-width="3.5" stroke-linejoin="round"/>
+        <path d="M90 35 L88 21 L77 28 Z" fill="#ff9fd6"/>
+        <rect x="16" y="22" width="88" height="64" rx="30" fill="#f4f1ff" stroke="#170d33" stroke-width="3.5"/>
+        <rect x="28" y="35" width="64" height="38" rx="17" fill="#170d33"/>
+        <rect x="41" y="45" width="9" height="14" rx="4.5" fill="#3ef7ff"/>
+        <rect x="70" y="45" width="9" height="14" rx="4.5" fill="#3ef7ff"/>
+        <path d="M54 63 q3 4 6 0 q3 4 6 0" fill="none" stroke="#3ef7ff" stroke-width="2.6" stroke-linecap="round"/>
+      </symbol>
+
+      <!-- Juice box -->
+      <symbol id="juice" viewBox="0 0 64 64">
+        <path d="M38 19 V9 L49 4.5" fill="none" stroke="#170d33" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M38 19 V9 L49 4.5" fill="none" stroke="#3ef7ff" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+        <rect x="13" y="17" width="38" height="44" rx="8" fill="#ffa53e" stroke="#170d33" stroke-width="3.5"/>
+        <path d="M13 25 H51" stroke="#170d33" stroke-width="3"/>
+        <rect x="18.5" y="30" width="27" height="24" rx="7" fill="#fff6c9" stroke="#170d33" stroke-width="2.6"/>
+        <circle cx="26.5" cy="40" r="2.5" fill="#170d33"/>
+        <circle cx="37.5" cy="40" r="2.5" fill="#170d33"/>
+        <path d="M29 45 q3 3.2 6 0" fill="none" stroke="#170d33" stroke-width="2.3" stroke-linecap="round"/>
+        <ellipse cx="22.8" cy="45" rx="2.7" ry="1.7" fill="#ff8fcf"/>
+        <ellipse cx="41.2" cy="45" rx="2.7" ry="1.7" fill="#ff8fcf"/>
+      </symbol>
+
+      <!-- cartoon stickers -->
+      <symbol id="st-star" viewBox="0 0 64 64">
+        <path d="M32 7 L39.35 23.89 L57.68 25.66 L43.89 37.86 L47.87 55.84 L32 46.5 L16.13 55.84 L20.11 37.86 L6.32 25.66 L24.65 23.89 Z" fill="#ffe45e" stroke="#170d33" stroke-width="3.5" stroke-linejoin="round"/>
+        <circle cx="27.5" cy="32" r="2.2" fill="#170d33"/><circle cx="36.5" cy="32" r="2.2" fill="#170d33"/>
+        <path d="M29.5 37 q2.5 2.6 5 0" fill="none" stroke="#170d33" stroke-width="2" stroke-linecap="round"/>
+      </symbol>
+      <symbol id="st-heart" viewBox="0 0 64 64">
+        <path d="M32 56 C14 44 6 34 6 23 C6 14 13 8 21 8 C26 8 30 11 32 15 C34 11 38 8 43 8 C51 8 58 14 58 23 C58 34 50 44 32 56 Z" fill="#ff7ac8" stroke="#170d33" stroke-width="3.5" stroke-linejoin="round"/>
+        <ellipse cx="18" cy="21" rx="4" ry="6" transform="rotate(35 18 21)" fill="#fff" opacity=".85"/>
+      </symbol>
+      <symbol id="st-cloud" viewBox="0 0 80 50">
+        <path d="M20 45 C9 45 4 38 4 31 C4 23 11 17 18 18 C20 9 28 4 37 5 C46 6 52 12 53 19 C56 16 62 16 66 19 C72 23 73 30 71 35 C76 37 76 45 70 45 Z" fill="#fff" stroke="#170d33" stroke-width="3.5" stroke-linejoin="round"/>
+        <circle cx="33" cy="30" r="2.3" fill="#170d33"/><circle cx="45" cy="30" r="2.3" fill="#170d33"/>
+        <ellipse cx="28" cy="35" rx="3" ry="1.8" fill="#ff9fd6"/><ellipse cx="50" cy="35" rx="3" ry="1.8" fill="#ff9fd6"/>
+        <path d="M37 34 q2 2 4 0" fill="none" stroke="#170d33" stroke-width="2" stroke-linecap="round"/>
+      </symbol>
+      <symbol id="st-planet" viewBox="0 0 80 64">
+        <g transform="rotate(-18 40 32)">
+          <path d="M6 33 A34 9 0 0 1 74 33" fill="none" stroke="#170d33" stroke-width="7"/>
+          <path d="M6 33 A34 9 0 0 1 74 33" fill="none" stroke="#ffe45e" stroke-width="3"/>
+        </g>
+        <circle cx="40" cy="32" r="18" fill="#b89cff" stroke="#170d33" stroke-width="3.5"/>
+        <circle cx="33" cy="26" r="3.5" fill="#9a78ff"/><circle cx="46" cy="38" r="2.5" fill="#9a78ff"/>
+        <g transform="rotate(-18 40 32)">
+          <path d="M6 33 A34 9 0 0 0 74 33" fill="none" stroke="#170d33" stroke-width="7"/>
+          <path d="M6 33 A34 9 0 0 0 74 33" fill="none" stroke="#ffe45e" stroke-width="3"/>
+        </g>
+      </symbol>
+      <symbol id="st-spark" viewBox="0 0 40 40">
+        <path d="M20 2 Q22 18 38 20 Q22 22 20 38 Q18 22 2 20 Q18 18 20 2 Z" fill="#3ef7ff" stroke="#170d33" stroke-width="2.5" stroke-linejoin="round"/>
+      </symbol>
+      <symbol id="st-ufo" viewBox="0 0 80 60">
+        <path d="M24 31 A16 15 0 0 1 56 31 Z" fill="#bff8ff" stroke="#170d33" stroke-width="3.5" stroke-linejoin="round"/>
+        <path d="M34 22 q3 -5 8 -5" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+        <ellipse cx="40" cy="35" rx="33" ry="10" fill="#ff4ecd" stroke="#170d33" stroke-width="3.5"/>
+        <circle cx="21" cy="36" r="3" fill="#ffe45e" stroke="#170d33" stroke-width="1.8"/>
+        <circle cx="40" cy="39" r="3" fill="#ffe45e" stroke="#170d33" stroke-width="1.8"/>
+        <circle cx="59" cy="36" r="3" fill="#ffe45e" stroke="#170d33" stroke-width="1.8"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <!-- ================= boot screen ================= -->
+  <div id="boot" class="boot" aria-hidden="true">
+    <div class="boot-box">
+      <div class="boot-logo"><svg><use href="#cat-head"/></svg><span>JUICE-OS</span></div>
+      <div class="boot-lines" id="boot-lines"></div>
+      <div class="boot-bar"><i id="boot-fill"></i></div>
+      <div class="boot-foot"><span id="boot-pct">0%</span><span class="boot-press">PRESS ANY KEY</span></div>
+    </div>
+  </div>
+
+  <!-- ================= background layers ================= -->
+  <div class="nebula" aria-hidden="true"><i></i><i></i><i></i></div>
+  <canvas id="starfield" aria-hidden="true"></canvas>
+  <canvas id="fx" aria-hidden="true"></canvas>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="xpbar" aria-hidden="true"><div class="xpbar-fill" id="xp"></div></div>
+
+  <!-- ================= nav ================= -->
+  <header class="nav" id="nav">
+    <a class="brand" href="#home" aria-label="Zhi Guo, back to top">
+      <svg aria-hidden="true"><use href="#cat-head"/></svg>
+      <span>Zhi<b>.juice</b></span>
+    </a>
+    <span class="lv" id="lv" aria-hidden="true">LV.00</span>
+    <nav aria-label="Primary">
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#about" data-sec="about" data-i18n="nav.about">About</a></li>
+        <li><a href="#quests" data-sec="quests" data-i18n="nav.quests">Experience</a></li>
+        <li><a href="#lab" data-sec="lab" data-i18n="nav.lab">Research</a></li>
+        <li><a href="#gadgets" data-sec="gadgets" data-i18n="nav.gadgets">Projects</a></li>
+        <li><a href="#academy" data-sec="academy" data-i18n="nav.academy">Education</a></li>
+        <li><a href="#skills" data-sec="skills" data-i18n="nav.skills">Skills</a></li>
+        <li><a href="#photos" data-sec="photos" data-i18n="nav.photos">Photos</a></li>
+        <li><a href="#contact" data-sec="contact" data-i18n="nav.contact">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="nav-tools">
+      <button class="icon-btn" id="drive-btn" type="button" data-i18n-title="nav.drive" title="Test drive (D)">🏎️</button>
+      <button class="icon-btn lang-btn" id="lang-btn" type="button" data-i18n-title="nav.lang" title="切换到中文"><span data-l="en">EN</span>/<span data-l="zh">中</span></button>
+      <button class="icon-btn menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="nav-links" data-i18n-title="nav.menu" title="Menu"><svg width="22" height="22"><use href="#i-menu"/></svg></button>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ================= hero ================= -->
+    <section id="home" class="hero">
+      <div class="grid-floor" aria-hidden="true"></div>
+      <div class="floaters" aria-hidden="true">
+        <svg class="fl fl-big" style="--x:47%;--y:27%;--d:1.2;--s:52px;--r:-14deg;--dur:7s"><use href="#st-star"/></svg>
+        <svg class="fl" style="--x:40%;--y:13%;--d:.6;--s:34px;--r:0deg;--dur:9s"><use href="#st-spark"/></svg>
+        <svg class="fl" style="--x:90%;--y:14%;--d:1.4;--s:80px;--r:8deg;--dur:8s"><use href="#st-planet"/></svg>
+        <svg class="fl fl-big" style="--x:36%;--y:88%;--d:.9;--s:84px;--r:-4deg;--dur:10s"><use href="#st-cloud"/></svg>
+        <svg class="fl" style="--x:58%;--y:90%;--d:1.1;--s:40px;--r:12deg;--dur:6s"><use href="#st-heart"/></svg>
+        <svg class="fl fl-big" style="--x:93%;--y:70%;--d:.7;--s:70px;--r:-10deg;--dur:11s"><use href="#st-ufo"/></svg>
+        <svg class="fl" style="--x:52%;--y:48%;--d:.5;--s:24px;--r:0deg;--dur:5s"><use href="#st-spark"/></svg>
+      </div>
+
+      <div class="hero-inner">
+        <div class="hero-text">
+          <span class="hud-tag" data-i18n="hero.hud">PLAYER 01 · ONLINE</span>
+          <p class="hello"><span data-i18n="hero.hello">Hi, I'm</span> <span class="wave" aria-hidden="true">👋</span></p>
+          <div class="name-row">
+            <h1 class="glitch" id="name" data-text="Zhi Guo">Zhi Guo</h1>
+            <span class="sticker aka"><svg aria-hidden="true"><use href="#juice"/></svg><span data-i18n="hero.aka">a.k.a. Juice · 郭智</span></span>
+          </div>
+          <p class="typer"><span class="prompt" aria-hidden="true">&gt;</span><span id="typer-text"></span><span class="caret" aria-hidden="true"></span></p>
+          <p class="intro" data-i18n="hero.intro">M.S. CS @ UW–Madison · ex-Tencent LightSpeed (Game for Peace).</p>
+          <div class="cta">
+            <a href="#quests" class="btn btn-neon magnetic" data-i18n="hero.cta1">▶ Start the quest</a>
+            <a href="#contact" class="btn btn-sticker magnetic" data-i18n="hero.cta2">📡 Say hi</a>
+          </div>
+          <div class="socials">
+            <a class="soc" href="https://github.com/Juice-zhi" target="_blank" rel="noopener" aria-label="GitHub"><svg><use href="#i-github"/></svg></a>
+            <a class="soc" href="https://www.linkedin.com/in/zhi-guo-418296225" target="_blank" rel="noopener" aria-label="LinkedIn"><svg><use href="#i-linkedin"/></svg></a>
+            <a class="soc" href="mailto:540393671@qq.com" aria-label="Email"><svg><use href="#i-mail"/></svg></a>
+          </div>
+        </div>
+
+        <div class="card-stage" id="card-stage">
+          <div class="retro-sun" aria-hidden="true"></div>
+          <div class="orbit" id="orbit" aria-hidden="true">
+            <span class="orbiter">🎮</span>
+            <span class="orbiter txt">C++</span>
+            <span class="orbiter">🚗</span>
+            <span class="orbiter txt">UE5</span>
+            <span class="orbiter">📷</span>
+            <span class="orbiter">✨</span>
+            <span class="orbiter">🐱</span>
+          </div>
+          <div class="holo-float">
+            <div class="holo" id="holo">
+              <div class="holo-inner">
+                <div class="hc-top">
+                  <span class="hc-name" data-i18n="card.name">Zhi Guo</span>
+                  <span class="hc-hp">HP <b>9999</b> ⚡</span>
+                </div>
+                <div class="hc-portrait">
+                  <picture>
+                    <source srcset="assets/avatar.webp" type="image/webp" />
+                    <img src="assets/avatar.jpg" alt="Portrait of Zhi Guo (郭智)" width="400" height="400" />
+                  </picture>
+                  <div class="hc-scan" aria-hidden="true"></div>
+                  <span class="hc-type" data-i18n="card.type">🎮 Gameplay · ✨ Graphics</span>
+                </div>
+                <div class="hc-moves">
+                  <div class="hc-move">
+                    <span class="hc-cost" aria-hidden="true">🚗</span>
+                    <div><b data-i18n="card.m1">Drift King</b><small data-i18n="card.m1d">Ships vehicle gameplay to ~40M daily players.</small></div>
+                    <span class="hc-dmg">40M</span>
+                  </div>
+                  <div class="hc-move">
+                    <span class="hc-cost" aria-hidden="true">✨</span>
+                    <div><b data-i18n="card.m2">Photon Beam</b><small data-i18n="card.m2d">Rebuilds 3D worlds one photon at a time.</small></div>
+                    <span class="hc-dmg">1γ</span>
+                  </div>
+                </div>
+                <div class="hc-foot"><span>Illus. Juice</span><span data-i18n="card.foot">★ HOLO RARE · 001/001</span></div>
+              </div>
+              <div class="holo-foil" aria-hidden="true"></div>
+              <div class="holo-glare" aria-hidden="true"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <a href="#about" class="scroll-hint"><span class="mouse" aria-hidden="true"></span><span data-i18n="hero.scroll">scroll to explore</span></a>
+    </section>
+
+    <!-- ================= marquee ================= -->
+    <div class="marquee" aria-hidden="true">
+      <div class="band band-1"><div class="track" id="band-1"></div></div>
+      <div class="band band-2"><div class="track" id="band-2"></div></div>
+    </div>
+
+    <!-- ================= about ================= -->
+    <section id="about" class="section">
+      <div class="wrap">
+        <header class="sec-head" data-reveal>
+          <span class="eyebrow" data-i18n="about.eyebrow">LEVEL 01 · ABOUT</span>
+          <h2 class="sec-title"><span class="emo" aria-hidden="true">🧑‍🚀</span><span data-i18n="about.title">Player Bio</span></h2>
+          <svg class="squiggle" viewBox="0 0 180 16" aria-hidden="true"><path d="M2 8 Q 12 0 22 8 T 42 8 T 62 8 T 82 8 T 102 8 T 122 8 T 142 8 T 162 8 T 178 8"/></svg>
+          <p class="sec-sub" data-i18n="about.sub">The human behind the hologram.</p>
+        </header>
+
+        <div class="about-grid">
+          <article class="panel window neon" data-reveal>
+            <div class="win-bar"><i></i><i></i><i></i><span data-i18n="about.file">about_me.md</span></div>
+            <div class="win-body" id="bio"></div>
+          </article>
+          <div class="about-side">
+            <div class="stats" id="stats"></div>
+            <div class="panel charsheet" data-reveal style="--d:2">
+              <h3 class="mini-head" data-i18n="about.sheet">CHARACTER SHEET</h3>
+              <dl id="charsheet"></dl>
+            </div>
+            <div class="panel now" data-reveal style="--d:3">
+              <h3 class="mini-head"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span><span data-i18n="about.now">NOW LOADING…</span></h3>
+              <ul id="now"></ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= experience ================= -->
+    <section id="quests" class="section">
+      <div class="wrap">
+        <header class="sec-head" data-reveal>
+          <span class="eyebrow" data-i18n="quests.eyebrow">LEVEL 02 · EXPERIENCE</span>
+          <h2 class="sec-title"><span class="emo" aria-hidden="true">🗺️</span><span data-i18n="quests.title">Quest Log</span></h2>
+          <svg class="squiggle" viewBox="0 0 180 16" aria-hidden="true"><path d="M2 8 Q 12 0 22 8 T 42 8 T 62 8 T 82 8 T 102 8 T 122 8 T 142 8 T 162 8 T 178 8"/></svg>
+          <p class="sec-sub" data-i18n="quests.sub">Main quests, side quests and one classified mission.</p>
+        </header>
+        <div class="timeline" id="timeline"><div class="tl-progress" aria-hidden="true"></div><div id="quests-list"></div></div>
+      </div>
+    </section>
+
+    <!-- ================= research ================= -->
+    <section id="lab" class="section">
+      <div class="wrap">
+        <header class="sec-head" data-reveal>
+          <span class="eyebrow" data-i18n="lab.eyebrow">LEVEL 03 · RESEARCH</span>
+          <h2 class="sec-title"><span class="emo" aria-hidden="true">🔬</span><span data-i18n="lab.title">The Photon Lab</span></h2>
+          <svg class="squiggle" viewBox="0 0 180 16" aria-hidden="true"><path d="M2 8 Q 12 0 22 8 T 42 8 T 62 8 T 82 8 T 102 8 T 122 8 T 142 8 T 162 8 T 178 8"/></svg>
+          <p class="sec-sub" data-i18n="lab.sub">Where light scatters, photons get counted and simulations get real.</p>
+        </header>
+        <div class="lab-grid" id="lab-grid"></div>
+      </div>
+    </section>
+
+    <!-- ================= projects ================= -->
+    <section id="gadgets" class="section">
+      <div class="wrap">
+        <header class="sec-head" data-reveal>
+          <span class="eyebrow" data-i18n="gadgets.eyebrow">LEVEL 04 · PROJECTS</span>
+          <h2 class="sec-title"><span class="emo" aria-hidden="true">🎒</span><span data-i18n="gadgets.title">Gadget Inventory</span></h2>
+          <svg class="squiggle" viewBox="0 0 180 16" aria-hidden="true"><path d="M2 8 Q 12 0 22 8 T 42 8 T 62 8 T 82 8 T 102 8 T 122 8 T 142 8 T 162 8 T 178 8"/></svg>
+          <p class="sec-sub" data-i18n="gadgets.sub">Open-source loot from my GitHub.</p>
+        </header>
+        <div class="loot-grid" id="loot-grid"></div>
+        <div class="more-loot" data-reveal>
+          <h3 class="mini-head" data-i18n="gadgets.more">More loot in the chest</h3>
+          <div class="mini-list" id="more-loot"></div>
+          <a class="btn btn-sticker magnetic all-repos" href="https://github.com/Juice-zhi?tab=repositories" target="_blank" rel="noopener">
+            <svg width="20" height="20" aria-hidden="true"><use href="#i-github"/></svg><span data-i18n="gadgets.all">Open the full chest on GitHub</span> ↗
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= education ================= -->
+    <section id="academy" class="section">
+      <div class="wrap">
+        <header class="sec-head" data-reveal>
+          <span class="eyebrow" data-i18n="academy.eyebrow">LEVEL 05 · EDUCATION</span>
+          <h2 class="sec-title"><span class="emo" aria-hidden="true">🎓</span><span data-i18n="academy.title">Academy Map</span></h2>
+          <svg class="squiggle" viewBox="0 0 180 16" aria-hidden="true"><path d="M2 8 Q 12 0 22 8 T 42 8 T 62 8 T 82 8 T 102 8 T 122 8 T 142 8 T 162 8 T 178 8"/></svg>
+          <p class="sec-sub" data-i18n="academy.sub">Three campuses, two continents, one very long flight path.</p>
+        </header>
+        <div class="academy" id="academy-list"></div>
+      </div>
+    </section>
+
+    <!-- ================= skills ================= -->
+    <section id="skills" class="section">
+      <div class="wrap">
+        <header class="sec-head" data-reveal>
+          <span class="eyebrow" data-i18n="skills.eyebrow">LEVEL 06 · SKILLS</span>
+          <h2 class="sec-title"><span class="emo" aria-hidden="true">🌟</span><span data-i18n="skills.title">Skill Tree</span></h2>
+          <svg class="squiggle" viewBox="0 0 180 16" aria-hidden="true"><path d="M2 8 Q 12 0 22 8 T 42 8 T 62 8 T 82 8 T 102 8 T 122 8 T 142 8 T 162 8 T 178 8"/></svg>
+          <p class="sec-sub" data-i18n="skills.sub">Skill points allocated.</p>
+        </header>
+        <div class="skill-grid" id="skill-grid"></div>
+      </div>
+    </section>
+
+    <!-- ================= achievements ================= -->
+    <section id="achievements" class="section">
+      <div class="wrap">
+        <header class="sec-head" data-reveal>
+          <span class="eyebrow" data-i18n="ach.eyebrow">LEVEL 07 · HIGHLIGHTS</span>
+          <h2 class="sec-title"><span class="emo" aria-hidden="true">🏆</span><span data-i18n="ach.title">Achievements</span></h2>
+          <svg class="squiggle" viewBox="0 0 180 16" aria-hidden="true"><path d="M2 8 Q 12 0 22 8 T 42 8 T 62 8 T 82 8 T 102 8 T 122 8 T 142 8 T 162 8 T 178 8"/></svg>
+          <p class="sec-sub" data-i18n="ach.sub">They unlock when you scroll here.</p>
+        </header>
+        <div class="ach-grid" id="ach-grid"></div>
+      </div>
+    </section>
+
+    <!-- ================= photo mode ================= -->
+    <section id="photos" class="section">
+      <div class="wrap">
+        <header class="sec-head" data-reveal>
+          <span class="eyebrow" data-i18n="photos.eyebrow">LEVEL 08 · PHOTO MODE</span>
+          <h2 class="sec-title"><span class="emo" aria-hidden="true">📸</span><span data-i18n="photos.title">Photo Mode</span></h2>
+          <svg class="squiggle" viewBox="0 0 180 16" aria-hidden="true"><path d="M2 8 Q 12 0 22 8 T 42 8 T 62 8 T 82 8 T 102 8 T 122 8 T 142 8 T 162 8 T 178 8"/></svg>
+          <p class="sec-sub" data-i18n="photos.sub">Screenshots from real life. Click a polaroid to zoom in.</p>
+        </header>
+        <div class="gallery" id="gallery"></div>
+      </div>
+    </section>
+
+    <!-- ================= side quests ================= -->
+    <section id="side" class="section">
+      <div class="wrap">
+        <header class="sec-head" data-reveal>
+          <span class="eyebrow" data-i18n="side.eyebrow">LEVEL 09 · BEYOND CODE</span>
+          <h2 class="sec-title"><span class="emo" aria-hidden="true">🎲</span><span data-i18n="side.title">Side Quests</span></h2>
+          <svg class="squiggle" viewBox="0 0 180 16" aria-hidden="true"><path d="M2 8 Q 12 0 22 8 T 42 8 T 62 8 T 82 8 T 102 8 T 122 8 T 142 8 T 162 8 T 178 8"/></svg>
+          <p class="sec-sub" data-i18n="side.sub">Things I do while the compiler is busy.</p>
+        </header>
+        <div class="side-grid">
+          <figure class="photo-card" id="photo-card" data-reveal>
+            <img src="assets/hk-skyline.jpg" alt="Hong Kong's West Kowloon skyline at golden hour, photographed by Zhi Guo" loading="lazy" width="2000" height="1331" />
+            <span class="sticker photo-tag" data-i18n="side.photoTag">📷 shot by me</span>
+            <figcaption class="photo-cap">
+              <h3 data-i18n="side.photoTitle">Golden Hour, Hong Kong</h3>
+              <p data-i18n="side.photoText">West Kowloon at dusk.</p>
+            </figcaption>
+          </figure>
+          <div class="panel side-card drive-card neon" data-reveal style="--d:1">
+            <h3><span class="ic" aria-hidden="true">🏎️</span><span data-i18n="side.driveTitle">Test Drive</span></h3>
+            <div class="road" aria-hidden="true">
+              <svg class="mini-car" viewBox="0 0 64 34">
+                <g fill="#170d33"><rect x="10" y="1" width="13" height="7" rx="2.5"/><rect x="40" y="1" width="13" height="7" rx="2.5"/><rect x="10" y="26" width="13" height="7" rx="2.5"/><rect x="40" y="26" width="13" height="7" rx="2.5"/></g>
+                <rect x="3" y="5" width="58" height="24" rx="10" fill="#ff4ecd" stroke="#170d33" stroke-width="2.6"/>
+                <rect x="4.5" y="14" width="55" height="2.3" fill="#fff" opacity=".9"/><rect x="4.5" y="17.8" width="55" height="2.3" fill="#fff" opacity=".9"/>
+                <rect x="37" y="8.5" width="10" height="17" rx="4" fill="#3ef7ff" stroke="#170d33" stroke-width="2.2"/>
+                <rect x="13" y="9" width="7" height="16" rx="3" fill="#3ef7ff" stroke="#170d33" stroke-width="2.2"/>
+                <circle cx="58.5" cy="10.5" r="2.4" fill="#ffe45e"/><circle cx="58.5" cy="23.5" r="2.4" fill="#ffe45e"/>
+              </svg>
+            </div>
+            <p data-i18n="side.driveText">Take one for a spin.</p>
+            <div class="side-actions">
+              <button class="btn btn-neon magnetic" type="button" id="drive-start" data-i18n="side.driveBtn">🚗 Start engine</button>
+              <small class="hint" data-i18n="side.driveHint">or press D anywhere</small>
+            </div>
+          </div>
+          <div class="panel side-card kitchen-card neon" data-reveal style="--d:2">
+            <h3><span class="ic" aria-hidden="true">🍜</span><span data-i18n="side.kitchenTitle">Kitchen Quest</span></h3>
+            <div class="food-row" aria-hidden="true"><span>🍰</span><span>🥟</span><span>🍣</span><span>🌶️</span><span>🍮</span></div>
+            <p data-i18n="side.kitchenText">200 recipes, zero burnt kitchens (so far).</p>
+            <a class="btn btn-sticker magnetic" href="https://juice-zhi.github.io/recipes/" target="_blank" rel="noopener"><span data-i18n="side.kitchenBtn">Open the cookbook</span> ↗</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= contact ================= -->
+    <section id="contact" class="section">
+      <div class="wrap">
+        <header class="sec-head" data-reveal>
+          <span class="eyebrow" data-i18n="contact.eyebrow">LEVEL 10 · CONTACT</span>
+          <h2 class="sec-title"><span class="emo" aria-hidden="true">📡</span><span data-i18n="contact.title">Open a Channel</span></h2>
+          <svg class="squiggle" viewBox="0 0 180 16" aria-hidden="true"><path d="M2 8 Q 12 0 22 8 T 42 8 T 62 8 T 82 8 T 102 8 T 122 8 T 142 8 T 162 8 T 178 8"/></svg>
+        </header>
+        <div class="panel contact-box neon" data-reveal>
+          <div class="contact-left">
+            <p class="contact-sub" data-i18n="contact.sub">My inbox is open.</p>
+            <a class="email-big" id="email-big" href="mailto:540393671@qq.com">540393671@qq.com</a>
+            <div class="contact-actions">
+              <a class="btn btn-neon magnetic" href="mailto:540393671@qq.com"><svg width="20" height="20" aria-hidden="true"><use href="#i-mail"/></svg><span data-i18n="contact.email">Email me</span></a>
+              <button class="btn btn-sticker magnetic" type="button" data-copy><svg width="20" height="20" aria-hidden="true"><use href="#i-copy"/></svg><span data-i18n="contact.copy">Copy address</span></button>
+            </div>
+            <div class="contact-socials">
+              <a class="soc" href="https://github.com/Juice-zhi" target="_blank" rel="noopener" aria-label="GitHub"><svg><use href="#i-github"/></svg></a>
+              <a class="soc" href="https://www.linkedin.com/in/zhi-guo-418296225" target="_blank" rel="noopener" aria-label="LinkedIn"><svg><use href="#i-linkedin"/></svg></a>
+            </div>
+            <p class="clock"><span class="clock-dot" aria-hidden="true"></span><span data-i18n="contact.clock">Local time in Madison:</span> <b id="clock-time">--:--</b> · <span id="clock-mood"></span></p>
+          </div>
+          <pre class="terminal" id="terminal" aria-hidden="true"></pre>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© 2026 <span data-i18n="footer.name">Zhi Guo (郭智)</span> · <span data-i18n="footer.made">Hand-made with HTML, CSS, vanilla JS &amp; a lot of 🧃</span></p>
+    <p class="secret" data-i18n="footer.secret">psst… try ↑↑↓↓←→←→BA, or press D</p>
+  </footer>
+
+  <!-- ================= Byte the robo-cat ================= -->
+  <div class="mascot" id="mascot" data-face="normal" role="button" tabindex="0" aria-label="Byte, a robot cat mascot. Click for a fun fact.">
+    <div class="bubble" id="bubble" role="status" aria-live="polite"></div>
+    <button class="mascot-hide" id="mascot-hide" type="button" aria-label="Hide mascot">×</button>
+    <svg viewBox="0 0 120 132" aria-hidden="true">
+      <ellipse class="m-shadow" cx="60" cy="126" rx="26" ry="5" fill="#000" opacity=".35"/>
+      <g class="m-bob">
+        <g class="m-tail">
+          <path d="M82 104 C102 104 110 88 101 76" fill="none" stroke="#170d33" stroke-width="10" stroke-linecap="round"/>
+          <path d="M82 104 C102 104 110 88 101 76" fill="none" stroke="#e9e4ff" stroke-width="5" stroke-linecap="round"/>
+          <circle cx="101" cy="75" r="5.5" fill="#3ef7ff" stroke="#170d33" stroke-width="2.5"/>
+        </g>
+        <ellipse cx="47" cy="118" rx="9" ry="5.5" fill="#d9d2ff" stroke="#170d33" stroke-width="3"/>
+        <ellipse cx="73" cy="118" rx="9" ry="5.5" fill="#d9d2ff" stroke="#170d33" stroke-width="3"/>
+        <rect x="36" y="82" width="48" height="36" rx="17" fill="#f4f1ff" stroke="#170d33" stroke-width="3.5"/>
+        <path class="m-core" d="M60 106 C53 101 51 97 51 94.5 C51 92 53 90.5 55.3 90.5 C57.5 90.5 59 92 60 93.6 C61 92 62.5 90.5 64.7 90.5 C67 90.5 69 92 69 94.5 C69 97 67 101 60 106 Z" fill="#ff4ecd" stroke="#170d33" stroke-width="2"/>
+        <g class="m-head">
+          <line x1="60" y1="22" x2="60" y2="9" stroke="#170d33" stroke-width="3.5"/>
+          <circle class="m-antenna" cx="60" cy="8" r="6" fill="#ffe45e" stroke="#170d33" stroke-width="3"/>
+          <path d="M24 42 L28 12 L52 28 Z" fill="#f4f1ff" stroke="#170d33" stroke-width="3.5" stroke-linejoin="round"/>
+          <path d="M30 35 L32 21 L43 28 Z" fill="#ff9fd6"/>
+          <path d="M96 42 L92 12 L68 28 Z" fill="#f4f1ff" stroke="#170d33" stroke-width="3.5" stroke-linejoin="round"/>
+          <path d="M90 35 L88 21 L77 28 Z" fill="#ff9fd6"/>
+          <g stroke="#170d33" stroke-width="2.4" stroke-linecap="round">
+            <path d="M16 58 L5 55"/><path d="M16 64 L4 65"/>
+            <path d="M104 58 L115 55"/><path d="M104 64 L116 65"/>
+          </g>
+          <rect x="16" y="22" width="88" height="64" rx="30" fill="#f4f1ff" stroke="#170d33" stroke-width="3.5"/>
+          <rect x="28" y="35" width="64" height="38" rx="17" fill="#170d33"/>
+          <path d="M34 41 q6 -4 14 -3" fill="none" stroke="#ffffff" stroke-opacity=".35" stroke-width="2.5" stroke-linecap="round"/>
+          <g class="m-eyes" id="m-eyes">
+            <g class="f-normal">
+              <rect x="41" y="45" width="9" height="14" rx="4.5" fill="#3ef7ff"/>
+              <rect x="70" y="45" width="9" height="14" rx="4.5" fill="#3ef7ff"/>
+            </g>
+            <g class="f-happy" fill="none" stroke="#3ef7ff" stroke-width="3.6" stroke-linecap="round">
+              <path d="M40 55 Q45.5 45 51 55"/><path d="M69 55 Q74.5 45 80 55"/>
+            </g>
+            <g class="f-love" fill="#ff4ecd">
+              <path d="M45.5 59 C40 55 38.5 52.5 38.5 50.5 C38.5 48.5 40 47 42 47 C43.5 47 44.8 48 45.5 49.3 C46.2 48 47.5 47 49 47 C51 47 52.5 48.5 52.5 50.5 C52.5 52.5 51 55 45.5 59 Z"/>
+              <path d="M74.5 59 C69 55 67.5 52.5 67.5 50.5 C67.5 48.5 69 47 71 47 C72.5 47 73.8 48 74.5 49.3 C75.2 48 76.5 47 78 47 C80 47 81.5 48.5 81.5 50.5 C81.5 52.5 80 55 74.5 59 Z"/>
+            </g>
+            <g class="f-wow" fill="#3ef7ff">
+              <circle cx="45.5" cy="52" r="6.5"/><circle cx="74.5" cy="52" r="6.5"/>
+              <circle cx="47.5" cy="50" r="2" fill="#fff"/><circle cx="76.5" cy="50" r="2" fill="#fff"/>
+            </g>
+            <g class="f-sleep" fill="none" stroke="#3ef7ff" stroke-width="3.2" stroke-linecap="round">
+              <path d="M40 53 H51"/><path d="M69 53 H80"/>
+            </g>
+          </g>
+          <ellipse cx="37" cy="64" rx="4.5" ry="2.6" fill="#ff4ecd" opacity=".75"/>
+          <ellipse cx="83" cy="64" rx="4.5" ry="2.6" fill="#ff4ecd" opacity=".75"/>
+          <path class="m-mouth" d="M54 64 q3 4 6 0 q3 4 6 0" fill="none" stroke="#3ef7ff" stroke-width="2.6" stroke-linecap="round"/>
+        </g>
+      </g>
+    </svg>
+  </div>
+
+  <!-- photo viewer -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Photo viewer">
+    <button class="lb-btn lb-close" id="lb-close" type="button" data-i18n-title="lb.close" title="Close">✕</button>
+    <button class="lb-btn lb-prev" id="lb-prev" type="button" data-i18n-title="lb.prev" title="Previous photo">‹</button>
+    <figure class="lb-frame">
+      <span class="tape" aria-hidden="true"></span>
+      <img id="lb-img" alt="" />
+      <figcaption><span id="lb-cap"></span><span class="lb-count" id="lb-count"></span></figcaption>
+    </figure>
+    <button class="lb-btn lb-next" id="lb-next" type="button" data-i18n-title="lb.next" title="Next photo">›</button>
+  </div>
+
+  <button class="to-top" id="to-top" type="button" aria-label="Back to top">🚀</button>
+  <div class="toasts" id="toasts" aria-live="polite"></div>
+
+  <!-- drive mode -->
+  <canvas id="drive" aria-hidden="true"></canvas>
+  <div class="drive-hud" id="drive-hud" aria-live="off">
+    <span><em data-i18n="drive.speed">SPEED</em> <b id="hud-speed">0</b> km/h</span>
+    <span><em data-i18n="drive.score">DRIFT</em> <b id="hud-score">0</b></span>
+    <span><em data-i18n="drive.best">BEST</em> <b id="hud-best">0</b></span>
+    <button type="button" id="drive-exit" class="hud-exit"><span data-i18n="drive.exit">Exit</span> ✕</button>
+  </div>
+
+  <noscript><div class="noscript">This page is best with JavaScript on. Find Zhi on <a href="https://github.com/Juice-zhi">GitHub</a> or <a href="https://www.linkedin.com/in/zhi-guo-418296225">LinkedIn</a>.</div></noscript>
+
+  <script src="js/content.js"></script>
+  <script src="js/fx.js"></script>
+  <script src="js/labviz.js"></script>
+  <script src="js/mascot.js"></script>
+  <script src="js/drive.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
