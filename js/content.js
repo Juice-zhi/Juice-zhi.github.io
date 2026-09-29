@@ -427,50 +427,12 @@ window.SITE = (() => {
           { label: { en: "Upstream", zh: "上游项目" }, url: L.autoresearch },
         ],
       },
-      {
-        name: "trading-assistant",
-        icon: "🔔",
-        rarity: "rare",
-        desc: {
-          en: "A desktop scanner that watches US stocks minute by minute. A per-symbol state machine detects EMA20/50/200 trend alignment and pullbacks, a three-indicator vote filters out choppy markets, alerts have cooldowns, and signals go out to Discord. It's covered by 123 unit tests.",
-          zh: "逐分钟盯盘的美股扫描桌面应用：用每只股票独立的状态机识别 EMA20/50/200 趋势排列与回踩信号，用三指标投票过滤震荡行情，告警带冷却，信号推送到 Discord。配有 123 个单元测试。",
-        },
-        tags: ["Python", "tkinter", "yfinance", "State Machines", "Discord"],
-        links: [{ label: { en: "Code", zh: "代码" }, url: repo("trading-assistant") }],
-      },
-      {
-        name: "pa_dashboard",
-        icon: "🕯️",
-        rarity: "rare",
-        desc: {
-          en: "A price-action analysis dashboard built with Flask and ECharts, with automatic pattern detection on price charts, a rolling-window backtest and 52 unit tests to keep the logic honest.",
-          zh: "基于 Flask + ECharts 的价格行为（Price Action）分析看板：自动识别价格形态，支持滚动窗口回测，由 52 个单元测试保证逻辑正确。",
-        },
-        tags: ["Python", "Flask", "ECharts", "Backtesting"],
-        links: [{ label: { en: "Code", zh: "代码" }, url: repo("pa_dashboard") }],
-      },
-      {
-        name: "recipes",
-        icon: "🍰",
-        rarity: "cozy",
-        desc: {
-          en: "A cozy side quest: 100 classic dishes (Sichuan staples, Chinese classics, sushi, pizza, pho…) and 100 desserts, organized and published as a static site.",
-          zh: "一个温馨的支线任务：收录 100 道经典菜肴（川菜、中华名菜、寿司、披萨、河粉……）和 100 道甜点，整理成可在线浏览的静态网站。",
-        },
-        tags: ["HTML", "GitHub Pages", "Food 🍜"],
-        links: [
-          { label: { en: "Visit site", zh: "访问网站" }, url: L.recipesSite },
-          { label: { en: "Code", zh: "代码" }, url: repo("recipes") },
-        ],
-      },
     ],
 
     moreLoot: [
       { name: "spx_gamma_indicator", url: repo("spx_gamma_indicator"), desc: { en: "Options gamma distribution for SPX/SPY/QQQ/MES/MNQ, turned into TradingView Pine indicators", zh: "计算 SPX/SPY/QQQ/MES/MNQ 期权 Gamma 分布，自动生成 TradingView Pine 指标" } },
       { name: "focus-switcher", url: repo("focus-switcher"), desc: { en: "Day-trading helper that brings your charting app to the front automatically", zh: "日内交易助手，自动把焦点切换到看盘软件" } },
       { name: "endfield-auto-signin", url: repo("endfield-auto-signin"), desc: { en: "Selenium bot for Arknights: Endfield daily check-in rewards", zh: "基于 Selenium 的《明日方舟：终末地》每日自动签到" } },
-      { name: "Impressionist", url: repo("Impressionist"), desc: { en: "Graphics coursework: paint photos into impressionist brush strokes (C++, FLTK, OpenGL)", zh: "图形学课程项目：把照片画成印象派笔触（C++ / FLTK / OpenGL）" } },
-      { name: "ModSkelS20", url: repo("ModSkelS20"), desc: { en: "Graphics coursework: a hierarchical 3D modeler (C++, FLTK, OpenGL)", zh: "图形学课程项目：层级式三维建模器（C++ / FLTK / OpenGL）" } },
     ],
 
     /* ---------------- Education ---------------- */
