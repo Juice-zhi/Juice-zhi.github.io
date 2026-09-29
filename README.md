@@ -26,7 +26,7 @@ assets/           头像、相册照片（gallery/，已去除 EXIF）、香港�
 
 - `profile`：邮箱、GitHub、LinkedIn、时区（联系区的「麦迪逊当地时间」用它）
 - `bio` / `stats` / `charsheet` / `now`：关于我
-- `experience`：工作经历（任务日志）
+- `experience`：工作经历（任务日志）；`works` 字段是「上线作品」视频卡（B 站链接 + `assets/works/` 里的 16:9 缩略图）
 - `research`：研究项目，`viz` 字段决定卡片顶部的小动画；`compact: true` 的卡片只显示实验室信息
 - `projects` / `moreLoot`：GitHub 项目
 - `education` / `skills` / `achievements`：教育、技能、成就

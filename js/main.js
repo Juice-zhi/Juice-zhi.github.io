@@ -38,6 +38,28 @@
   const chips = (arr) => arr.map((x) => `<span class="chip">${t(x)}</span>`).join("");
   const bulletList = (items, withTitle) =>
     `<ul class="bullets">${items.map((b) => `<li><span class="bi" aria-hidden="true">${b.icon}</span><div>${withTitle ? `<strong>${t(b.title)}</strong>` : ""}<p>${t(b.text)}</p></div></li>`).join("")}</ul>`;
+  const worksStrip = (works) => `
+    <div class="works">
+      <h4 class="works-head"><span class="works-ic" aria-hidden="true">🎬</span>${ui("works.title")}</h4>
+      <p class="works-sub">${ui("works.sub")}</p>
+      <div class="works-grid">${works.map((w, i) => `
+        <a class="work" href="${w.url}" target="_blank" rel="noopener" style="--i:${i}">
+          <span class="work-thumb">
+            <img src="${w.thumb}" alt="" width="800" height="450" loading="lazy" decoding="async" />
+            <span class="work-tag">${t(w.tag)}</span>
+            <span class="work-sticker" aria-hidden="true">${w.sticker}</span>
+            <span class="work-play" aria-hidden="true"></span>
+            <span class="work-dur">${w.duration}</span>
+          </span>
+          <span class="work-body">
+            <span class="work-map">📍 ${t(w.map)}</span>
+            <strong class="work-title">${t(w.title)}</strong>
+            <span class="work-desc">${t(w.desc)}</span>
+            <span class="work-src"><span class="work-bili">▶ ${ui("works.watch")} ↗</span><span class="work-up">${ui("works.by")} ${escapeHTML(w.uploader)}</span></span>
+          </span>
+        </a>`).join("")}
+      </div>
+    </div>`;
 
   let statsCounted = false, achUnlocked = false;
 
@@ -67,6 +89,7 @@
           </div>
           <p class="summary">${t(q.summary)}</p>
           ${bulletList(q.bullets, true)}
+          ${q.works ? worksStrip(q.works) : ""}
           <div class="tags">${chips(q.tags)}</div>
           ${q.links && q.links.length ? `<div class="links">${q.links.map(linkBtn).join("")}</div>` : ""}
         </div>

@@ -149,6 +149,51 @@ window.SITE = (() => {
             },
           },
         ],
+        // shipped features, shown as video cards (gameplay videos by players on Bilibili)
+        works: [
+          {
+            url: "https://www.bilibili.com/video/BV1JNo2YLEpF/",
+            thumb: "assets/works/arms-truck.jpg",
+            sticker: "🚚",
+            tag: "CG31",
+            duration: "1:14",
+            map: { en: "Island map", zh: "海岛" },
+            title: { en: "Arms Transport Truck", zh: "海岛军火运输车" },
+            desc: {
+              en: "An armored supply truck that rolls across the Island on six different routes, dropping loot along the way.",
+              zh: "会掉落物资的军火运输车，沿六条运输路线在海岛上穿行。",
+            },
+            uploader: "哆啦和平精英",
+          },
+          {
+            url: "https://www.bilibili.com/video/BV1FUqcBFEDa/",
+            thumb: "assets/works/dunhuang-camel.jpg",
+            sticker: "🐫",
+            tag: "CG35",
+            duration: "0:16",
+            map: { en: "Island map · Lunar New Year", zh: "海岛 · 新春" },
+            title: { en: "Dunhuang Camel", zh: "海岛新春敦煌骆驼" },
+            desc: {
+              en: "A festive Dunhuang-style camel for the Lunar New Year update. Hop on and ride it across the Island.",
+              zh: "新春版本上线的敦煌风骆驼，跳上去就能骑着它在海岛上奔跑。",
+            },
+            uploader: "羞蕊",
+          },
+          {
+            url: "https://www.bilibili.com/video/BV1FZMg6XEPR/",
+            thumb: "assets/works/haunted-palanquin.jpg",
+            sticker: "🏮",
+            tag: { en: "LOST TOMB", zh: "古墓迷途" },
+            duration: "2:01",
+            map: { en: "Changbai Celestial Palace", zh: "长白仙宫" },
+            title: { en: "Haunted Palanquin", zh: "仙宫诡轿" },
+            desc: {
+              en: "Eerie sedan chairs you can drive or ride through the Changbai Celestial Palace in the Lost Tomb mode.",
+              zh: "古墓迷途模式中长白仙宫里的诡轿，既可以驾驶，也可以乘坐。",
+            },
+            uploader: "小新新看动漫玩游戏",
+          },
+        ],
         tags: ["C++", "Unreal Engine", "Gameplay Systems", "Vehicle Physics", "Network Resilience", "Anti-Cheat", "Tools & Pipelines", "Live Ops"],
         links: [
           { label: { en: "LightSpeed Studios", zh: "光子工作室群" }, url: L.lightspeed },
@@ -640,6 +685,10 @@ window.SITE = (() => {
       "quests.eyebrow": { en: "LEVEL 02 · EXPERIENCE", zh: "第 02 关 · 工作经历" },
       "quests.title": { en: "Quest Log", zh: "任务日志" },
       "quests.sub": { en: "Main quests, side quests and one classified mission.", zh: "主线、支线，还有一个保密任务。" },
+      "works.title": { en: "Shipped in the live game", zh: "上线作品" },
+      "works.sub": { en: "Some of the features I worked on, in action. Click to watch on Bilibili (gameplay videos by community creators).", zh: "我参与开发并已上线的部分内容，点击去 B 站看实机视频（视频来自社区 UP 主）。" },
+      "works.watch": { en: "Watch on Bilibili", zh: "在 B 站观看" },
+      "works.by": { en: "video by", zh: "UP 主" },
 
       "lab.eyebrow": { en: "LEVEL 03 · RESEARCH", zh: "第 03 关 · 科研" },
       "lab.title": { en: "The Photon Lab", zh: "光子实验室" },
