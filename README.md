@@ -31,6 +31,13 @@ assets/           头像、相册照片（gallery/，已去除 EXIF）、香港�
 - `projects` / `moreLoot`：GitHub 项目
 - `education` / `skills` / `achievements`：教育、技能、成就
 - `gallery`：「拍照模式」相册，每张照片有原图 `src` 和缩略图 `thumb`，加新照片时记得先去掉 EXIF 定位信息
+
+## 暗房画廊（摄影作品）
+
+- 数据在 `js/photos.js`：`albums` 是每次出片的相册（标题、地点），`items` 是每张照片（大图、缩略图、尺寸、标题、占位色、拍摄参数）
+- 图片在 `assets/photography/`（长边 1800px）和 `assets/photography/thumbs/`（宽 640px），都已转成 sRGB 并去掉了全部 EXIF；网页上显示的拍摄参数是导出前单独提取的
+- 加新照片：导出两个尺寸放进上面两个文件夹，再往 `items` 里加一条；`featured` 数字越小，在「全部」里排得越靠前
+- 交互逻辑在 `js/gallery.js`：瀑布流、按年份筛选、分批「冲洗」、带参数面板的大图查看器（支持键盘左右键和手机滑动）
 - `ui`：页面上的按钮、标题等固定文案
 - `mascot`：机器猫的台词
 

@@ -416,7 +416,7 @@
     $$(".nav-links a").forEach((a) => a.addEventListener("click", navClose));
   }
 
-  const secIds = ["about", "quests", "lab", "gadgets", "academy", "skills", "achievements", "photos", "side", "contact"];
+  const secIds = ["about", "quests", "lab", "gadgets", "academy", "skills", "achievements", "darkroom", "photos", "side", "contact"];
   let currentSec = null, leveledUp = false, ticking = false;
   function onScroll() {
     ticking = false;
@@ -623,7 +623,7 @@
     if (k === KONAMI[kIdx]) { if (++kIdx === KONAMI.length) { kIdx = 0; toggleParty(); } }
     else kIdx = k === KONAMI[0] ? 1 : 0;
     if (k === "escape") navClose();
-    if (k === "d" && !Drive.active && !lightbox.open && !e.ctrlKey && !e.metaKey && !e.altKey && !typingTarget(e)) startDrive();
+    if (k === "d" && !Drive.active && !lightbox.open && !Gallery.open && !e.ctrlKey && !e.metaKey && !e.altKey && !typingTarget(e)) startDrive();
   });
 
   function startDrive() {
@@ -652,6 +652,7 @@
     typer.start();
     clock();
     terminal.rerun();
+    Gallery.refresh();
     lightbox.refresh();
     toast(lang === "zh" ? "🀄" : "🔤", ui("toast.lang"), ui("toast.langText"), 2200);
   }
@@ -660,6 +661,7 @@
   applyStatic();
   renderBands();
   renderAll(false);
+  Gallery.init({ t, ui });
   heroFx();
   magnetic();
   navSetup();

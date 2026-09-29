@@ -162,7 +162,8 @@
         <li><a href="#gadgets" data-sec="gadgets" data-i18n="nav.gadgets">Projects</a></li>
         <li><a href="#academy" data-sec="academy" data-i18n="nav.academy">Education</a></li>
         <li><a href="#skills" data-sec="skills" data-i18n="nav.skills">Skills</a></li>
-        <li><a href="#photos" data-sec="photos" data-i18n="nav.photos">Photos</a></li>
+        <li><a href="#darkroom" data-sec="darkroom" data-i18n="nav.darkroom">Gallery</a></li>
+        <li><a href="#photos" data-sec="photos" data-i18n="nav.photos">Life</a></li>
         <li><a href="#contact" data-sec="contact" data-i18n="nav.contact">Contact</a></li>
       </ul>
     </nav>
@@ -379,11 +380,32 @@
       </div>
     </section>
 
+    <!-- ================= photography gallery ================= -->
+    <section id="darkroom" class="section">
+      <div class="wrap">
+        <header class="sec-head" data-reveal>
+          <span class="eyebrow" data-i18n="dr.eyebrow">LEVEL 08 · PHOTOGRAPHY</span>
+          <h2 class="sec-title"><span class="emo" aria-hidden="true">🎞️</span><span data-i18n="dr.title">The Darkroom</span></h2>
+          <svg class="squiggle" viewBox="0 0 180 16" aria-hidden="true"><path d="M2 8 Q 12 0 22 8 T 42 8 T 62 8 T 82 8 T 102 8 T 122 8 T 142 8 T 162 8 T 178 8"/></svg>
+          <p class="sec-sub" data-i18n="dr.sub">Landscapes, cities, skies and small things I've photographed since 2022.</p>
+        </header>
+        <div class="dr-bar" data-reveal>
+          <p class="dr-stats" id="dr-stats"></p>
+          <div class="dr-chips" id="dr-chips" role="group"></div>
+        </div>
+        <div class="dr-grid" id="dr-grid"></div>
+        <div class="dr-more">
+          <button class="btn btn-neon magnetic" type="button" id="dr-more"></button>
+          <p class="dr-end" id="dr-end" hidden></p>
+        </div>
+      </div>
+    </section>
+
     <!-- ================= photo mode ================= -->
     <section id="photos" class="section">
       <div class="wrap">
         <header class="sec-head" data-reveal>
-          <span class="eyebrow" data-i18n="photos.eyebrow">LEVEL 08 · PHOTO MODE</span>
+          <span class="eyebrow" data-i18n="photos.eyebrow">LEVEL 09 · PHOTO MODE</span>
           <h2 class="sec-title"><span class="emo" aria-hidden="true">📸</span><span data-i18n="photos.title">Photo Mode</span></h2>
           <svg class="squiggle" viewBox="0 0 180 16" aria-hidden="true"><path d="M2 8 Q 12 0 22 8 T 42 8 T 62 8 T 82 8 T 102 8 T 122 8 T 142 8 T 162 8 T 178 8"/></svg>
           <p class="sec-sub" data-i18n="photos.sub">Screenshots from real life. Click a polaroid to zoom in.</p>
@@ -396,7 +418,7 @@
     <section id="side" class="section">
       <div class="wrap">
         <header class="sec-head" data-reveal>
-          <span class="eyebrow" data-i18n="side.eyebrow">LEVEL 09 · BEYOND CODE</span>
+          <span class="eyebrow" data-i18n="side.eyebrow">LEVEL 10 · BEYOND CODE</span>
           <h2 class="sec-title"><span class="emo" aria-hidden="true">🎲</span><span data-i18n="side.title">Side Quests</span></h2>
           <svg class="squiggle" viewBox="0 0 180 16" aria-hidden="true"><path d="M2 8 Q 12 0 22 8 T 42 8 T 62 8 T 82 8 T 102 8 T 122 8 T 142 8 T 162 8 T 178 8"/></svg>
           <p class="sec-sub" data-i18n="side.sub">Things I do while the compiler is busy.</p>
@@ -442,7 +464,7 @@
     <section id="contact" class="section">
       <div class="wrap">
         <header class="sec-head" data-reveal>
-          <span class="eyebrow" data-i18n="contact.eyebrow">LEVEL 10 · CONTACT</span>
+          <span class="eyebrow" data-i18n="contact.eyebrow">LEVEL 11 · CONTACT</span>
           <h2 class="sec-title"><span class="emo" aria-hidden="true">📡</span><span data-i18n="contact.title">Open a Channel</span></h2>
           <svg class="squiggle" viewBox="0 0 180 16" aria-hidden="true"><path d="M2 8 Q 12 0 22 8 T 42 8 T 62 8 T 82 8 T 102 8 T 122 8 T 142 8 T 162 8 T 178 8"/></svg>
         </header>
@@ -541,6 +563,26 @@
     <button class="lb-btn lb-next" id="lb-next" type="button" data-i18n-title="lb.next" title="Next photo">›</button>
   </div>
 
+  <!-- darkroom viewer: live-view screen with an EXIF HUD -->
+  <div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Photo viewer">
+    <button class="lb-btn vw-close" id="vw-close" type="button" data-i18n-title="lb.close" title="Close">✕</button>
+    <button class="lb-btn vw-prev" id="vw-prev" type="button" data-i18n-title="lb.prev" title="Previous photo">‹</button>
+    <figure class="vw-frame">
+      <div class="vw-screen" id="vw-screen">
+        <img id="vw-img" alt="" />
+        <span class="vw-corner tl" aria-hidden="true"></span><span class="vw-corner tr" aria-hidden="true"></span>
+        <span class="vw-corner bl" aria-hidden="true"></span><span class="vw-corner br" aria-hidden="true"></span>
+        <span class="vw-rec" aria-hidden="true">JUICE-CAM</span>
+        <span class="vw-count" id="vw-count"></span>
+      </div>
+      <figcaption class="vw-hud">
+        <div class="vw-title"><b id="vw-title"></b><span id="vw-meta"></span></div>
+        <ul class="vw-exif" id="vw-exif"></ul>
+      </figcaption>
+    </figure>
+    <button class="lb-btn vw-next" id="vw-next" type="button" data-i18n-title="lb.next" title="Next photo">›</button>
+  </div>
+
   <button class="to-top" id="to-top" type="button" aria-label="Back to top">🚀</button>
   <div class="toasts" id="toasts" aria-live="polite"></div>
 
@@ -560,6 +602,8 @@
   <script src="js/labviz.js"></script>
   <script src="js/mascot.js"></script>
   <script src="js/drive.js"></script>
+  <script src="js/photos.js"></script>
+  <script src="js/gallery.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
