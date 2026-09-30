@@ -194,8 +194,8 @@ window.PHOTOS = {
   },
   "2024-12-01": {
    "title": {
-    "en": "Dusk",
-    "zh": "黄昏"
+    "en": "Olympic",
+    "zh": "奥运"
    },
    "place": {
     "en": "Hong Kong",
@@ -371,7 +371,8 @@ window.PHOTOS = {
     "f": "ƒ/2.8",
     "ss": "1/2500",
     "iso": "ISO 250"
-   }
+   },
+   "hidden": true
   },
   {
    "id": "2026-05-01-02",
@@ -394,7 +395,8 @@ window.PHOTOS = {
     "f": "ƒ/5.6",
     "ss": "1/640",
     "iso": "ISO 1000"
-   }
+   },
+   "featured": 21
   },
   {
    "id": "2026-05-01-01",
@@ -447,7 +449,8 @@ window.PHOTOS = {
    "title": {
     "en": "White lighthouse",
     "zh": "白色灯塔"
-   }
+   },
+   "hidden": true
   },
   {
    "id": "2025-10-05-20",
@@ -478,7 +481,8 @@ window.PHOTOS = {
    "title": {
     "en": "Coastal cliffs",
     "zh": "海岸峭壁"
-   }
+   },
+   "hidden": true
   },
   {
    "id": "2025-10-05-18",
@@ -508,7 +512,8 @@ window.PHOTOS = {
    "title": {
     "en": "Two stacks in the surf",
     "zh": "浪中双柱"
-   }
+   },
+   "hidden": true
   },
   {
    "id": "2025-10-05-16",
@@ -599,7 +604,8 @@ window.PHOTOS = {
    "title": {
     "en": "7-Eleven",
     "zh": "7-Eleven"
-   }
+   },
+   "featured": 22
   },
   {
    "id": "2025-10-05-10",
@@ -629,7 +635,8 @@ window.PHOTOS = {
    "title": {
     "en": "Up the hill",
     "zh": "上山"
-   }
+   },
+   "hidden": true
   },
   {
    "id": "2025-10-05-08",
@@ -689,7 +696,8 @@ window.PHOTOS = {
    "title": {
     "en": "Sun through the trees",
     "zh": "树梢的阳光"
-   }
+   },
+   "hidden": true
   },
   {
    "id": "2025-10-05-04",
@@ -734,7 +742,8 @@ window.PHOTOS = {
    "title": {
     "en": "White blossoms",
     "zh": "白色花簇"
-   }
+   },
+   "hidden": true
   },
   {
    "id": "2025-10-05-01",
@@ -794,7 +803,8 @@ window.PHOTOS = {
    "title": {
     "en": "Wallaby",
     "zh": "沙袋鼠"
-   }
+   },
+   "hidden": true
   },
   {
    "id": "2025-10-04-08",
@@ -824,7 +834,8 @@ window.PHOTOS = {
    "title": {
     "en": "Green cliffs",
     "zh": "绿色海崖"
-   }
+   },
+   "hidden": true
   },
   {
    "id": "2025-10-04-06",
@@ -839,7 +850,8 @@ window.PHOTOS = {
    "title": {
     "en": "Island through the windshield",
     "zh": "挡风玻璃外的岛"
-   }
+   },
+   "hidden": true
   },
   {
    "id": "2025-10-04-05",
@@ -869,7 +881,8 @@ window.PHOTOS = {
    "title": {
     "en": "Sheep on the lawn",
     "zh": "草坪上的羊"
-   }
+   },
+   "hidden": true
   },
   {
    "id": "2025-10-04-03",
@@ -959,7 +972,8 @@ window.PHOTOS = {
    "title": {
     "en": "Palm and bridge",
     "zh": "棕榈与大桥"
-   }
+   },
+   "featured": 26
   },
   {
    "id": "2025-09-30-10",
@@ -1035,7 +1049,8 @@ window.PHOTOS = {
    "title": {
     "en": "Sandstone clock tower",
     "zh": "砂岩钟楼"
-   }
+   },
+   "featured": 24
   },
   {
    "id": "2025-09-30-05",
@@ -1050,7 +1065,8 @@ window.PHOTOS = {
    "title": {
     "en": "Manly Wharf at night",
     "zh": "夜色曼利码头"
-   }
+   },
+   "featured": 23
   },
   {
    "id": "2025-09-30-04",
@@ -1080,7 +1096,8 @@ window.PHOTOS = {
    "title": {
     "en": "Gull on the Corso sign",
     "zh": "路牌上的海鸥"
-   }
+   },
+   "featured": 25
   },
   {
    "id": "2025-09-30-02",
@@ -1170,7 +1187,7 @@ window.PHOTOS = {
    "color": "#59483e",
    "title": {
     "en": "Tea tins",
-    "zh": "茶罐"
+    "zh": "猫空茶罐"
    },
    "exif": {
     "cam": "Nikon Z 8",
@@ -1202,7 +1219,8 @@ window.PHOTOS = {
     "f": "ƒ/1.8",
     "ss": "1/100",
     "iso": "ISO 250"
-   }
+   },
+   "hidden": true
   },
   {
    "id": "2024-12-01-02",
@@ -1225,7 +1243,8 @@ window.PHOTOS = {
     "f": "ƒ/4",
     "ss": "1/10",
     "iso": "ISO 640"
-   }
+   },
+   "hidden": true
   },
   {
    "id": "2024-12-01-01",
@@ -1248,7 +1267,8 @@ window.PHOTOS = {
     "f": "ƒ/4",
     "ss": "1/30",
     "iso": "ISO 640"
-   }
+   },
+   "featured": 27
   },
   {
    "id": "2024-10-07-06",
@@ -1294,7 +1314,8 @@ window.PHOTOS = {
     "f": "ƒ/5",
     "ss": "1/1000",
     "iso": "ISO 100"
-   }
+   },
+   "hidden": true
   },
   {
    "id": "2024-10-07-04",
@@ -1317,7 +1338,8 @@ window.PHOTOS = {
     "f": "ƒ/5",
     "ss": "1/1250",
     "iso": "ISO 100"
-   }
+   },
+   "hidden": true
   },
   {
    "id": "2024-10-07-03",
@@ -1411,7 +1433,8 @@ window.PHOTOS = {
     "f": "ƒ/5",
     "ss": "1/640",
     "iso": "ISO 220"
-   }
+   },
+   "hidden": true
   },
   {
    "id": "2024-08-11-01",
@@ -1434,7 +1457,8 @@ window.PHOTOS = {
     "f": "ƒ/4",
     "ss": "1/250",
     "iso": "ISO 1000"
-   }
+   },
+   "hidden": true
   },
   {
    "id": "2024-06-29-03",
@@ -1550,7 +1574,8 @@ window.PHOTOS = {
     "ss": "1/80",
     "iso": "ISO 16000"
    },
-   "featured": 19
+   "featured": 19,
+   "hidden": true
   },
   {
    "id": "2024-06-19-02",
@@ -1573,7 +1598,8 @@ window.PHOTOS = {
     "f": "ƒ/4.2",
     "ss": "1/80",
     "iso": "ISO 16000"
-   }
+   },
+   "hidden": true
   },
   {
    "id": "2024-06-19-01",
@@ -1596,7 +1622,8 @@ window.PHOTOS = {
     "f": "ƒ/5.3",
     "ss": "1/80",
     "iso": "ISO 5000"
-   }
+   },
+   "hidden": true
   },
   {
    "id": "2024-06-16-01",
@@ -1619,7 +1646,8 @@ window.PHOTOS = {
     "f": "ƒ/5",
     "ss": "1/160",
     "iso": "ISO 100"
-   }
+   },
+   "hidden": true
   },
   {
    "id": "2024-06-08-08",
@@ -1642,7 +1670,8 @@ window.PHOTOS = {
     "f": "ƒ/10",
     "ss": "1/125",
     "iso": "ISO 500"
-   }
+   },
+   "featured": 28
   },
   {
    "id": "2024-06-08-07",
@@ -1711,7 +1740,8 @@ window.PHOTOS = {
     "f": "ƒ/4",
     "ss": "1/800",
     "iso": "ISO 250"
-   }
+   },
+   "featured": 29
   },
   {
    "id": "2024-06-08-04",
@@ -1842,7 +1872,8 @@ window.PHOTOS = {
     "f": "ƒ/5.6",
     "ss": "1/80",
     "iso": "ISO 400"
-   }
+   },
+   "hidden": true
   },
   {
    "id": "2024-05-11-05",
@@ -1865,7 +1896,8 @@ window.PHOTOS = {
     "f": "ƒ/6.3",
     "ss": "1/400",
     "iso": "ISO 400"
-   }
+   },
+   "hidden": true
   },
   {
    "id": "2024-05-11-04",
@@ -1888,7 +1920,8 @@ window.PHOTOS = {
     "f": "ƒ/6.3",
     "ss": "1/400",
     "iso": "ISO 400"
-   }
+   },
+   "hidden": true
   },
   {
    "id": "2024-05-11-03",
@@ -1958,7 +1991,8 @@ window.PHOTOS = {
     "f": "ƒ/4.8",
     "ss": "1/320",
     "iso": "ISO 200"
-   }
+   },
+   "hidden": true
   },
   {
    "id": "2024-03-09-02",
@@ -1981,7 +2015,8 @@ window.PHOTOS = {
     "f": "ƒ/1.8",
     "ss": "1/2000",
     "iso": "ISO 100"
-   }
+   },
+   "hidden": true
   },
   {
    "id": "2024-03-09-01",
@@ -2004,7 +2039,8 @@ window.PHOTOS = {
     "f": "ƒ/1.8",
     "ss": "1/100",
     "iso": "ISO 1000"
-   }
+   },
+   "hidden": true
   },
   {
    "id": "2024-01-11-12",
@@ -2027,7 +2063,8 @@ window.PHOTOS = {
     "f": "ƒ/1.8",
     "ss": "1/8000",
     "iso": "ISO 50"
-   }
+   },
+   "hidden": true
   },
   {
    "id": "2024-01-11-11",
@@ -2050,7 +2087,8 @@ window.PHOTOS = {
     "f": "ƒ/1.8",
     "ss": "1/8000",
     "iso": "ISO 50"
-   }
+   },
+   "hidden": true
   },
   {
    "id": "2024-01-11-10",
@@ -2073,7 +2111,8 @@ window.PHOTOS = {
     "f": "ƒ/1.8",
     "ss": "1/1600",
     "iso": "ISO 100"
-   }
+   },
+   "hidden": true
   },
   {
    "id": "2024-01-11-09",
@@ -2096,7 +2135,8 @@ window.PHOTOS = {
     "f": "ƒ/1.8",
     "ss": "1/1600",
     "iso": "ISO 100"
-   }
+   },
+   "hidden": true
   },
   {
    "id": "2024-01-11-08",
@@ -2119,7 +2159,8 @@ window.PHOTOS = {
     "f": "ƒ/1.8",
     "ss": "1/1600",
     "iso": "ISO 100"
-   }
+   },
+   "hidden": true
   },
   {
    "id": "2024-01-11-07",
@@ -2166,7 +2207,8 @@ window.PHOTOS = {
     "f": "ƒ/1.8",
     "ss": "1/1000",
     "iso": "ISO 100"
-   }
+   },
+   "hidden": true
   },
   {
    "id": "2024-01-11-05",
@@ -2189,7 +2231,8 @@ window.PHOTOS = {
     "f": "ƒ/1.8",
     "ss": "1/2000",
     "iso": "ISO 100"
-   }
+   },
+   "hidden": true
   },
   {
    "id": "2024-01-11-04",
@@ -2212,7 +2255,8 @@ window.PHOTOS = {
     "f": "ƒ/1.8",
     "ss": "1/1000",
     "iso": "ISO 100"
-   }
+   },
+   "hidden": true
   },
   {
    "id": "2024-01-11-03",
@@ -2235,7 +2279,8 @@ window.PHOTOS = {
     "f": "ƒ/1.8",
     "ss": "1/2000",
     "iso": "ISO 100"
-   }
+   },
+   "hidden": true
   },
   {
    "id": "2024-01-11-02",
@@ -2258,7 +2303,8 @@ window.PHOTOS = {
     "f": "ƒ/1.8",
     "ss": "1/1250",
     "iso": "ISO 100"
-   }
+   },
+   "hidden": true
   },
   {
    "id": "2024-01-11-01",
@@ -2281,7 +2327,8 @@ window.PHOTOS = {
     "f": "ƒ/1.8",
     "ss": "1/4000",
     "iso": "ISO 100"
-   }
+   },
+   "hidden": true
   },
   {
    "id": "2023-11-24-08",
@@ -2537,7 +2584,8 @@ window.PHOTOS = {
     "f": "ƒ/6.3",
     "ss": "1/1600",
     "iso": "ISO 100"
-   }
+   },
+   "hidden": true
   },
   {
    "id": "2023-10-14-01",
@@ -2583,7 +2631,8 @@ window.PHOTOS = {
     "f": "ƒ/5.6",
     "ss": "1/4",
     "iso": "ISO 2000"
-   }
+   },
+   "hidden": true
   },
   {
    "id": "2023-09-23-03",
@@ -2607,7 +2656,7 @@ window.PHOTOS = {
     "ss": "30s",
     "iso": "ISO 100"
    },
-   "featured": 12
+   "hidden": true
   },
   {
    "id": "2023-09-23-02",
@@ -2630,7 +2679,8 @@ window.PHOTOS = {
     "f": "ƒ/4",
     "ss": "30s",
     "iso": "ISO 320"
-   }
+   },
+   "hidden": true
   },
   {
    "id": "2023-09-23-01",
@@ -2653,7 +2703,8 @@ window.PHOTOS = {
     "f": "ƒ/4",
     "ss": "30s",
     "iso": "ISO 320"
-   }
+   },
+   "hidden": true
   },
   {
    "id": "2023-09-03-06",
@@ -2723,7 +2774,8 @@ window.PHOTOS = {
     "f": "ƒ/11",
     "ss": "1/250",
     "iso": "ISO 250"
-   }
+   },
+   "hidden": true
   },
   {
    "id": "2023-09-03-03",
@@ -2769,7 +2821,8 @@ window.PHOTOS = {
     "f": "ƒ/6.3",
     "ss": "1/200",
     "iso": "ISO 64508"
-   }
+   },
+   "hidden": true
   },
   {
    "id": "2023-09-03-01",
@@ -2792,7 +2845,8 @@ window.PHOTOS = {
     "f": "ƒ/6.3",
     "ss": "1/200",
     "iso": "ISO 64508"
-   }
+   },
+   "hidden": true
   },
   {
    "id": "2023-08-21-02",
@@ -2861,7 +2915,8 @@ window.PHOTOS = {
     "f": "ƒ/1.8",
     "ss": "1/200",
     "iso": "ISO 640"
-   }
+   },
+   "hidden": true
   },
   {
    "id": "2023-02-13-06",
@@ -2885,7 +2940,7 @@ window.PHOTOS = {
     "ss": "1/13700",
     "iso": "ISO 80"
    },
-   "featured": 13
+   "hidden": true
   },
   {
    "id": "2023-02-13-05",
@@ -2908,7 +2963,8 @@ window.PHOTOS = {
     "f": "ƒ/2",
     "ss": "1/80",
     "iso": "ISO 100"
-   }
+   },
+   "hidden": true
   },
   {
    "id": "2023-02-13-04",
@@ -2954,7 +3010,8 @@ window.PHOTOS = {
     "f": "ƒ/6.3",
     "ss": "1/1000",
     "iso": "ISO 400"
-   }
+   },
+   "hidden": true
   },
   {
    "id": "2023-02-13-02",
@@ -2977,7 +3034,8 @@ window.PHOTOS = {
     "f": "ƒ/6.3",
     "ss": "1/400",
     "iso": "ISO 100"
-   }
+   },
+   "featured": 30
   },
   {
    "id": "2023-02-13-01",
@@ -3001,7 +3059,7 @@ window.PHOTOS = {
     "ss": "1/400",
     "iso": "ISO 100"
    },
-   "featured": 8
+   "hidden": true
   },
   {
    "id": "2023-02-05-02",
@@ -3048,7 +3106,8 @@ window.PHOTOS = {
     "f": "ƒ/1.8",
     "ss": "1/100",
     "iso": "ISO 160"
-   }
+   },
+   "featured": 31
   },
   {
    "id": "2022-10-11-07",
@@ -3064,7 +3123,8 @@ window.PHOTOS = {
     "en": "Sea through the window",
     "zh": "窗外的海"
    },
-   "film": "Fujicolor Pro 400H"
+   "film": "Fujicolor Pro 400H",
+   "hidden": true
   },
   {
    "id": "2022-10-11-06",
@@ -3080,7 +3140,8 @@ window.PHOTOS = {
     "en": "Seafood stall",
     "zh": "海鲜档"
    },
-   "film": "Fujicolor Pro 400H"
+   "film": "Fujicolor Pro 400H",
+   "hidden": true
   },
   {
    "id": "2022-10-11-05",
@@ -3096,7 +3157,8 @@ window.PHOTOS = {
     "en": "Slow",
     "zh": "慢行"
    },
-   "film": "Fujicolor Pro 400H"
+   "film": "Fujicolor Pro 400H",
+   "hidden": true
   },
   {
    "id": "2022-10-11-04",
@@ -3112,7 +3174,8 @@ window.PHOTOS = {
     "en": "Crossing the plaza",
     "zh": "穿过广场"
    },
-   "film": "Fujicolor Pro 400H"
+   "film": "Fujicolor Pro 400H",
+   "hidden": true
   },
   {
    "id": "2022-10-11-03",
@@ -3128,7 +3191,8 @@ window.PHOTOS = {
     "en": "Building under clouds",
     "zh": "云下的楼"
    },
-   "film": "Fujicolor Pro 400H"
+   "film": "Fujicolor Pro 400H",
+   "hidden": true
   },
   {
    "id": "2022-10-11-02",
@@ -3144,7 +3208,8 @@ window.PHOTOS = {
     "en": "Down the stairs",
     "zh": "下楼梯"
    },
-   "film": "Fujicolor Pro 400H"
+   "film": "Fujicolor Pro 400H",
+   "hidden": true
   },
   {
    "id": "2022-10-11-01",
@@ -3160,7 +3225,8 @@ window.PHOTOS = {
     "en": "Street lamp in the trees",
     "zh": "树间路灯"
    },
-   "film": "Fujicolor Pro 400H"
+   "film": "Fujicolor Pro 400H",
+   "hidden": true
   },
   {
    "id": "2022-10-10-08",
@@ -3229,7 +3295,8 @@ window.PHOTOS = {
     "f": "ƒ/6.3",
     "ss": "1/640",
     "iso": "ISO 280"
-   }
+   },
+   "featured": 32
   },
   {
    "id": "2022-10-10-05",
@@ -3298,7 +3365,8 @@ window.PHOTOS = {
     "f": "ƒ/6.3",
     "ss": "1/640",
     "iso": "ISO 1600"
-   }
+   },
+   "hidden": true
   },
   {
    "id": "2022-10-10-02",
@@ -3345,7 +3413,7 @@ window.PHOTOS = {
     "ss": "1/640",
     "iso": "ISO 2200"
    },
-   "featured": 20
+   "hidden": true
   },
   {
    "id": "2022-10-01-03",
@@ -3437,7 +3505,8 @@ window.PHOTOS = {
     "f": "ƒ/6.3",
     "ss": "1/500",
     "iso": "ISO 160"
-   }
+   },
+   "hidden": true
   },
   {
    "id": "2022-09-03-05",
@@ -3460,7 +3529,8 @@ window.PHOTOS = {
     "f": "ƒ/6",
     "ss": "1/400",
     "iso": "ISO 160"
-   }
+   },
+   "hidden": true
   },
   {
    "id": "2022-09-03-04",
@@ -3483,7 +3553,8 @@ window.PHOTOS = {
     "f": "ƒ/6.3",
     "ss": "1/800",
     "iso": "ISO 160"
-   }
+   },
+   "hidden": true
   },
   {
    "id": "2022-09-03-03",
@@ -3506,7 +3577,8 @@ window.PHOTOS = {
     "f": "ƒ/5",
     "ss": "1/1000",
     "iso": "ISO 160"
-   }
+   },
+   "hidden": true
   },
   {
    "id": "2022-09-03-02",
@@ -3529,7 +3601,8 @@ window.PHOTOS = {
     "f": "ƒ/6",
     "ss": "1/500",
     "iso": "ISO 160"
-   }
+   },
+   "hidden": true
   },
   {
    "id": "2022-09-03-01",
@@ -3552,7 +3625,8 @@ window.PHOTOS = {
     "f": "ƒ/5",
     "ss": "1/500",
     "iso": "ISO 160"
-   }
+   },
+   "hidden": true
   }
  ]
 };
