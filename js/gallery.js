@@ -6,11 +6,12 @@
    ========================================================================== */
 window.Gallery = (() => {
   const P = window.PHOTOS || { albums: {}, items: [] };
+  const ITEMS = P.items.filter((p) => !p.hidden); // tools/photo-editor.html can hide photos
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const $ = (s) => document.querySelector(s);
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const year = (p) => p.album.slice(0, 4);
-  const years = [...new Set(P.items.map(year))].sort().reverse();
+  const years = [...new Set(ITEMS.map(year))].sort().reverse();
 
   let t = (v) => (v && typeof v === "object" ? v.en : v);
   let ui = (k) => k;
@@ -19,9 +20,9 @@ window.Gallery = (() => {
 
   /* ---------------- data helpers ---------------- */
   function ordered(f) {
-    if (f !== "all") return P.items.filter((p) => year(p) === f); // photos.js is already newest first
-    const featured = P.items.filter((p) => p.featured).sort((a, b) => a.featured - b.featured);
-    return featured.concat(P.items.filter((p) => !p.featured));
+    if (f !== "all") return ITEMS.filter((p) => year(p) === f); // photos.js is already newest first
+    const featured = ITEMS.filter((p) => p.featured).sort((a, b) => a.featured - b.featured);
+    return featured.concat(ITEMS.filter((p) => !p.featured));
   }
   const batch = () => (window.innerWidth < 640 ? 12 : 20);
   const colCount = () => {
@@ -30,7 +31,8 @@ window.Gallery = (() => {
   };
   function meta(p) {
     const a = P.albums[p.album] || {};
-    return [t(a.title), a.place && t(a.place), p.album.replace(/-/g, ".")].filter(Boolean).join(" · ");
+    const place = p.place || a.place; // a photo can override its album's place
+    return [t(a.title), place && t(place), p.album.replace(/-/g, ".")].filter(Boolean).join(" · ");
   }
   function settings(p) {
     if (p.film) return `${ui("dr.film")} · ${p.film}`;
@@ -100,14 +102,15 @@ window.Gallery = (() => {
   }
 
   function renderChips() {
-    const count = (f) => (f === "all" ? P.items.length : P.items.filter((p) => year(p) === f).length);
+    const count = (f) => (f === "all" ? ITEMS.length : ITEMS.filter((p) => year(p) === f).length);
     chipsEl.innerHTML = ["all", ...years]
       .map((f) => `<button type="button" class="dr-chip${f === filter ? " on" : ""}" data-f="${f}" aria-pressed="${f === filter}">${f === "all" ? ui("dr.all") : f}<sup>${count(f)}</sup></button>`)
       .join("");
   }
 
   function renderStats() {
-    statsEl.innerHTML = `<span><b>${P.items.length}</b> ${ui("dr.frames")}</span> · <span><b>${Object.keys(P.albums).length}</b> ${ui("dr.rolls")}</span> · <span><b>${years[years.length - 1]}</b> → <b>${years[0]}</b></span>`;
+    const rolls = new Set(ITEMS.map((p) => p.album)).size;
+    statsEl.innerHTML = `<span><b>${ITEMS.length}</b> ${ui("dr.frames")}</span> · <span><b>${rolls}</b> ${ui("dr.rolls")}</span> · <span><b>${years[years.length - 1]}</b> → <b>${years[0]}</b></span>`;
   }
 
   function setFilter(f) {
@@ -175,7 +178,7 @@ window.Gallery = (() => {
     statsEl = $("#dr-stats");
     moreBtn = $("#dr-more");
     endEl = $("#dr-end");
-    if (!grid || !P.items.length) return;
+    if (!grid || !ITEMS.length) return;
     Object.assign(V, {
       box: $("#viewer"), screen: $("#vw-screen"), img: $("#vw-img"), title: $("#vw-title"),
       meta: $("#vw-meta"), count: $("#vw-count"), exif: $("#vw-exif"),
@@ -228,7 +231,7 @@ window.Gallery = (() => {
   }
 
   function refresh() { // language switch: update text in place, keep what's developed
-    if (!grid || !P.items.length) return;
+    if (!grid || !ITEMS.length) return;
     renderStats();
     renderChips();
     updateMore();

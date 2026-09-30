@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>暗房编辑器 · Darkroom Editor</title>
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" media="print" onload="this.media='all'"
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" />
+  <style>
+    :root {
+      --bg: #0a0620; --panel: #150d33; --line: rgba(190, 170, 255, .2); --text: #f1ecff; --muted: #bdb2dd; --dim: #8d82b3;
+      --cyan: #3ef7ff; --pink: #ff4ecd; --lemon: #ffe45e; --mint: #5effc8; --red: #ff5a7a; --ink: #170d33;
+      --f-d: "Fredoka", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+      --f-b: system-ui, "PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif;
+      --f-m: "JetBrains Mono", Consolas, "Microsoft YaHei", monospace;
+    }
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    body { margin: 0; background: var(--bg); color: var(--text); font: 15px/1.5 var(--f-b); }
+    button { font: inherit; }
+
+    .top {
+      position: sticky; top: 0; z-index: 20; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px;
+      padding: 12px 20px; background: rgba(10, 6, 32, .94); border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    }
+    .brand { display: flex; align-items: baseline; gap: 10px; font: 700 20px var(--f-d); }
+    .brand small { font: 500 13px var(--f-m); color: var(--dim); }
+    .mode { padding: 5px 11px; border-radius: 999px; font-size: 13px; border: 1px solid var(--line); background: rgba(255, 255, 255, .05); }
+    .mode.ok { color: var(--mint); border-color: rgba(94, 255, 200, .45); }
+    .mode.off { color: var(--lemon); border-color: rgba(255, 228, 94, .45); }
+    .actions { margin-left: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+    .state { font: 600 13px var(--f-m); color: var(--mint); }
+    .state.dirty { color: var(--lemon); }
+    .btn {
+      position: relative; padding: 8px 14px; border-radius: 12px; cursor: pointer; text-decoration: none;
+      font: 600 14px var(--f-d); color: var(--ink); background: #fff; border: 2px solid var(--ink); box-shadow: 3px 3px 0 var(--pink);
+      transition: transform .15s, box-shadow .15s;
+    }
+    .btn:hover:not(:disabled) { transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--pink); }
+    .btn:disabled { opacity: .45; cursor: not-allowed; }
+    .btn.save { background: var(--cyan); }
+    .btn.pub { background: var(--lemon); }
+    .btn.ghost { color: var(--text); background: transparent; border-color: var(--line); box-shadow: none; }
+    .btn .dot { position: absolute; top: -6px; right: -6px; min-width: 18px; height: 18px; padding: 0 5px; border-radius: 9px; font: 700 11px/18px var(--f-m); color: #fff; background: var(--red); border: 2px solid var(--ink); }
+    kbd { margin-left: 4px; font: 600 11px var(--f-m); opacity: .6; }
+
+    .bar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 14px 20px 4px; }
+    .bar input, .bar select { padding: 8px 12px; border-radius: 10px; color: var(--text); background: var(--panel); border: 1px solid var(--line); font: 14px var(--f-b); }
+    .bar input { width: min(320px, 100%); }
+    .seg { display: inline-flex; overflow: hidden; border-radius: 10px; border: 1px solid var(--line); }
+    .seg button { padding: 8px 12px; cursor: pointer; color: var(--muted); background: transparent; border: 0; font: 600 13px var(--f-d); }
+    .seg button.on { color: var(--ink); background: var(--lemon); }
+    .count { font-size: 13px; color: var(--dim); }
+    .help { margin: 8px 20px 0; padding: 10px 14px; border-radius: 12px; font-size: 13.5px; color: var(--muted); background: rgba(62, 247, 255, .06); border: 1px dashed rgba(62, 247, 255, .3); }
+    .help b { color: var(--text); }
+    .help code { font: 12.5px var(--f-m); color: var(--mint); }
+
+    main { padding: 6px 20px 90px; }
+    .album { margin-top: 22px; padding: 16px; border-radius: 18px; background: rgba(255, 255, 255, .02); border: 1px solid var(--line); }
+    .album-head { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 10px 18px; margin-bottom: 14px; }
+    .album-head h2 { margin: 0; min-width: 130px; font: 700 20px var(--f-d); }
+    .album-head h2 small { display: block; font: 500 12px var(--f-m); color: var(--dim); }
+    .quad { flex: 1; min-width: 280px; display: grid; grid-template-columns: repeat(4, minmax(120px, 1fr)); gap: 8px; }
+    label.f { display: flex; flex-direction: column; gap: 3px; font-size: 11.5px; color: var(--dim); }
+    label.f input {
+      width: 100%; padding: 7px 9px; border-radius: 9px; color: var(--text); background: var(--panel);
+      border: 1.5px solid var(--line); font: 14px var(--f-b); transition: border-color .15s, box-shadow .15s;
+    }
+    label.f input::placeholder { color: #6f6596; }
+    label.f input:focus { outline: none; border-color: var(--cyan); box-shadow: 0 0 0 3px rgba(62, 247, 255, .15); }
+    label.f input.changed { border-color: var(--lemon); box-shadow: 0 0 0 3px rgba(255, 228, 94, .14); }
+    .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 580px), 1fr)); gap: 12px; }
+    .card { display: grid; grid-template-columns: 210px 1fr; overflow: hidden; border-radius: 14px; background: var(--panel); border: 1px solid var(--line); }
+    .card.changed { border-color: rgba(255, 228, 94, .7); }
+    .card.is-hidden { background: repeating-linear-gradient(45deg, var(--panel) 0 12px, #10092a 12px 24px); }
+    .card.is-hidden .thumb img { opacity: .3; filter: grayscale(1); }
+    .thumb { position: relative; display: block; width: 100%; height: 100%; min-height: 150px; padding: 0; border: 0; cursor: zoom-in; background: #07041a; }
+    .thumb img { display: block; width: 100%; height: 100%; object-fit: contain; }
+    .thumb .id { position: absolute; left: 6px; top: 6px; padding: 2px 6px; border-radius: 5px; font: 600 10.5px var(--f-m); color: var(--mint); background: rgba(0, 0, 0, .65); }
+    .thumb .flags { position: absolute; right: 6px; top: 6px; display: flex; gap: 4px; }
+    .thumb .flags span { padding: 2px 7px; border-radius: 5px; font: 700 11px var(--f-d); }
+    .flag-star { color: var(--ink); background: var(--lemon); }
+    .flag-hide { color: #fff; background: var(--red); }
+    .fields { display: grid; grid-template-columns: 1fr 1fr; align-content: start; gap: 6px 10px; padding: 10px 12px 12px; }
+    .tools { grid-column: 1 / -1; display: flex; align-items: center; gap: 6px; margin-top: 2px; }
+    .tg { padding: 4px 10px; border-radius: 999px; cursor: pointer; font: 600 12px var(--f-d); color: var(--muted); background: transparent; border: 1.5px solid var(--line); }
+    .tg.star[aria-pressed="true"] { color: var(--ink); background: var(--lemon); border-color: var(--lemon); }
+    .tg.hide[aria-pressed="true"] { color: #fff; background: var(--red); border-color: var(--red); }
+    .exif { margin-left: auto; overflow: hidden; max-width: 48%; white-space: nowrap; text-overflow: ellipsis; font: 11px var(--f-m); color: var(--dim); }
+    .empty { margin: 40px 0; text-align: center; color: var(--dim); }
+
+    .toast {
+      position: fixed; left: 50%; bottom: 22px; z-index: 40; max-width: min(560px, calc(100vw - 32px)); padding: 11px 16px; border-radius: 14px;
+      font: 600 14px var(--f-d); color: var(--ink); background: var(--mint); border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--ink);
+      transform: translate(-50%, 160%); transition: transform .35s cubic-bezier(.34, 1.56, .64, 1);
+    }
+    .toast.show { transform: translate(-50%, 0); }
+    .toast.err { background: var(--red); color: #fff; }
+    .modal, .peek { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; padding: 24px; background: rgba(4, 2, 14, .88); }
+    .modal .box { width: min(640px, 100%); padding: 20px 22px; border-radius: 18px; background: var(--panel); border: 1px solid var(--line); }
+    .modal h3 { margin: 0 0 10px; font: 700 19px var(--f-d); }
+    .modal pre { max-height: 50vh; overflow: auto; margin: 0 0 14px; padding: 12px; border-radius: 10px; white-space: pre-wrap; word-break: break-word; font: 12.5px/1.6 var(--f-m); color: var(--mint); background: #07041a; }
+    .peek { cursor: zoom-out; }
+    .peek figure { margin: 0; text-align: center; }
+    .peek img { max-width: 92vw; max-height: 82vh; border-radius: 8px; }
+    .peek figcaption { margin-top: 10px; font: 600 14px var(--f-d); color: var(--muted); }
+    @media (max-width: 720px) {
+      .top { position: static; }
+      .quad { grid-template-columns: 1fr 1fr; }
+      .card { grid-template-columns: 1fr; }
+      .thumb { height: auto; aspect-ratio: 16 / 10; }
+    }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <div class="brand">🎞️ 暗房编辑器 <small>Darkroom Editor</small></div>
+    <span class="mode" id="mode">…</span>
+    <div class="actions">
+      <span class="state" id="state"></span>
+      <a class="btn ghost" id="preview" href="../index.html#darkroom" target="_blank" rel="noopener">预览网站 ↗</a>
+      <button class="btn ghost" type="button" id="revert">撤销未保存的修改</button>
+      <button class="btn save" type="button" id="save">保存<kbd>Ctrl S</kbd></button>
+      <button class="btn pub" type="button" id="publish">发布上线</button>
+    </div>
+  </header>
+
+  <div class="bar">
+    <input id="q" type="search" placeholder="搜索标题、相册、地点、编号…" aria-label="搜索" />
+    <select id="album-filter" aria-label="相册"></select>
+    <div class="seg" id="view" role="group" aria-label="筛选">
+      <button type="button" data-v="all" class="on">全部</button>
+      <button type="button" data-v="changed">未保存</button>
+      <button type="button" data-v="featured">★ 精选</button>
+      <button type="button" data-v="hidden">已隐藏</button>
+    </div>
+    <span class="count" id="count"></span>
+  </div>
+  <p class="help">
+    <b>怎么用：</b>每组照片上方是<b>相册名</b>和<b>默认地点</b>，这组照片都会用它；某张照片在别的地方拍的，就在那张照片下面单独填<b>地点</b>（留空就用相册的）。
+    中英文只填一种也行，保存时会自动用另一种补上。<b>★ 精选</b>的照片排在画廊「全部」的最前面；<b>隐藏</b>的照片不会出现在网站上。
+    改过的地方会标黄，改完点<b>保存</b>，再点<b>发布上线</b>，大约一分钟后网站就会更新。点缩略图可以看大图。
+  </p>
+  <main id="albums"></main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div class="modal" id="log" hidden>
+    <div class="box" role="dialog" aria-modal="true" aria-labelledby="log-title">
+      <h3 id="log-title"></h3>
+      <pre id="log-out"></pre>
+      <button class="btn" type="button" id="log-close">好的</button>
+    </div>
+  </div>
+  <div class="peek" id="peek" hidden><figure><img id="peek-img" alt="" /><figcaption id="peek-cap"></figcaption></figure></div>
+
+  <script src="../js/photos.js"></script>
+  <script>
+  (() => {
+    const HEADER =
+      "/* ==========================================================================\n" +
+      "   photos.js: the photography gallery (\"The Darkroom\"). Generated from the\n" +
+      "   edited exports; images live in assets/photography (+ /thumbs), sRGB, no EXIF.\n" +
+      "   ========================================================================== */\n";
+    const $ = (s) => document.querySelector(s);
+    const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+    const clone = (o) => JSON.parse(JSON.stringify(o));
+    const main = $("#albums");
+
+    if (!window.PHOTOS) {
+      main.innerHTML = '<p class="empty">没有找到 <code>js/photos.js</code>。请从项目里的 <code>tools</code> 文件夹打开这个页面。</p>';
+      return;
+    }
+
+    let saved = clone(window.PHOTOS); // what js/photos.js holds now
+    let work = clone(window.PHOTOS);  // what's on screen
+    let byId, savedById;
+    const index = () => {
+      byId = new Map(work.items.map((i) => [i.id, i]));
+      savedById = new Map(saved.items.map((i) => [i.id, i]));
+    };
+    index();
+    const albumKeys = Object.keys(work.albums).sort().reverse();
+    let view = "all";
+
+    /* ---------- server connection ---------- */
+    let token = "";
+    try { token = sessionStorage.getItem("drToken") || ""; } catch (_) {}
+    const m = location.hash.match(/t=([\w-]+)/);
+    if (m) {
+      token = m[1];
+      try { sessionStorage.setItem("drToken", token); } catch (_) {}
+      history.replaceState(null, "", location.pathname + location.search);
+    }
+    let server = false;
+    async function api(path, body) {
+      const r = await fetch(path, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "X-Editor-Token": token },
+        body: body === undefined ? "{}" : JSON.stringify(body),
+      });
+      const j = await r.json().catch(() => ({ ok: false, error: `HTTP ${r.status}` }));
+      if (!r.ok) j.ok = false;
+      return j;
+    }
+
+    /* ---------- helpers ---------- */
+    const txt = (v, l) => (v && v[l]) || "";
+    const same = (a, b) => txt(a, "en").trim() === txt(b, "en").trim() && txt(a, "zh").trim() === txt(b, "zh").trim();
+    function itemChanged(it) {
+      const s = savedById.get(it.id);
+      return !same(it.title, s.title) || !same(it.place, s.place) || !!it.hidden !== !!s.hidden || !!it.featured !== !!s.featured;
+    }
+    function albumChanged(k) { return !same(work.albums[k].title, saved.albums[k].title) || !same(work.albums[k].place, saved.albums[k].place); }
+    function changes() {
+      let n = 0;
+      for (const k of albumKeys) n += (!same(work.albums[k].title, saved.albums[k].title)) + (!same(work.albums[k].place, saved.albums[k].place));
+      for (const it of work.items) {
+        const s = savedById.get(it.id);
+        n += (!same(it.title, s.title)) + (!same(it.place, s.place)) + (!!it.hidden !== !!s.hidden) + (!!it.featured !== !!s.featured);
+      }
+      return n;
+    }
+    function exifLine(it) {
+      if (it.film) return "Film · " + it.film;
+      const e = it.exif || {};
+      return [e.cam, e.focal, e.f, e.ss, e.iso].filter(Boolean).join(" · ");
+    }
+
+    /* ---------- render ---------- */
+    function field(scope, key, name, lang, label, placeholder) {
+      const obj = scope === "album" ? work.albums[key] : byId.get(key);
+      return `<label class="f">${label}<input data-s="${scope}" data-k="${key}" data-f="${name}" data-l="${lang}"
+        value="${esc(txt(obj[name], lang))}" placeholder="${esc(placeholder || "")}" maxlength="160" /></label>`;
+    }
+    function flags(it) {
+      return (it.featured ? '<span class="flag-star">★ 精选</span>' : "") + (it.hidden ? '<span class="flag-hide">已隐藏</span>' : "");
+    }
+    function card(it) {
+      const a = work.albums[it.album];
+      return `<article class="card${it.hidden ? " is-hidden" : ""}" data-id="${it.id}">
+        <button class="thumb" type="button" data-peek="${it.id}" title="看大图">
+          <img src="../${esc(it.thumb)}" alt="" loading="lazy" width="${it.tw}" height="${it.th}" />
+          <span class="id">${it.id}</span><span class="flags">${flags(it)}</span>
+        </button>
+        <div class="fields">
+          ${field("item", it.id, "title", "zh", "标题", "")}
+          ${field("item", it.id, "title", "en", "Title", "")}
+          ${field("item", it.id, "place", "zh", "地点", a.place ? "相册默认：" + a.place.zh : "（无）")}
+          ${field("item", it.id, "place", "en", "Place", a.place ? "Album: " + a.place.en : "(none)")}
+          <div class="tools">
+            <button class="tg star" type="button" data-t="featured" aria-pressed="${!!it.featured}">★ 精选</button>
+            <button class="tg hide" type="button" data-t="hidden" aria-pressed="${!!it.hidden}">隐藏</button>
+            <span class="exif" title="${esc(exifLine(it))}">${esc(exifLine(it))}</span>
+          </div>
+        </div>
+      </article>`;
+    }
+    function render() {
+      main.innerHTML = albumKeys.map((k) => {
+        const items = work.items.filter((i) => i.album === k).sort((x, y) => x.id.localeCompare(y.id));
+        return `<section class="album" data-album="${k}">
+          <div class="album-head">
+            <h2>${k.replace(/-/g, ".")}<small>${items.length} 张</small></h2>
+            <div class="quad">
+              ${field("album", k, "title", "zh", "相册名", "")}
+              ${field("album", k, "title", "en", "Album name", "")}
+              ${field("album", k, "place", "zh", "默认地点", "（无）")}
+              ${field("album", k, "place", "en", "Default place", "(none)")}
+            </div>
+          </div>
+          <div class="cards">${items.map(card).join("")}</div>
+        </section>`;
+      }).join("") + '<p class="empty" id="none" hidden>没有符合条件的照片。</p>';
+      $("#album-filter").innerHTML = '<option value="">全部相册</option>' +
+        albumKeys.map((k) => `<option value="${k}">${k.replace(/-/g, ".")} · ${esc(work.albums[k].title.zh)}</option>`).join("");
+    }
+
+    /* ---------- state marks ---------- */
+    function savedValue(scope, key, name, lang) {
+      const o = scope === "album" ? saved.albums[key] : savedById.get(key);
+      return txt(o && o[name], lang);
+    }
+    function markInput(inp) {
+      const { s, k, f, l } = inp.dataset;
+      inp.classList.toggle("changed", inp.value.trim() !== savedValue(s, k, f, l).trim());
+    }
+    function markCard(id) {
+      const it = byId.get(id);
+      const el = main.querySelector(`.card[data-id="${id}"]`);
+      el.classList.toggle("changed", itemChanged(it));
+      el.classList.toggle("is-hidden", !!it.hidden);
+      el.querySelector(".flags").innerHTML = flags(it);
+      el.querySelector('.tg[data-t="featured"]').setAttribute("aria-pressed", String(!!it.featured));
+      el.querySelector('.tg[data-t="hidden"]').setAttribute("aria-pressed", String(!!it.hidden));
+    }
+    function updatePlaceholders(k) {
+      const p = work.albums[k].place;
+      main.querySelectorAll(`.album[data-album="${k}"] input[data-s="item"][data-f="place"]`).forEach((inp) => {
+        const v = p && txt(p, inp.dataset.l).trim();
+        inp.placeholder = v ? (inp.dataset.l === "zh" ? "相册默认：" : "Album: ") + v : (inp.dataset.l === "zh" ? "（无）" : "(none)");
+      });
+    }
+    function updateState() {
+      const n = changes();
+      const st = $("#state");
+      st.textContent = n ? `● ${n} 处未保存` : "✓ 已全部保存";
+      st.classList.toggle("dirty", n > 0);
+      $("#save").disabled = n === 0;
+      $("#revert").disabled = n === 0;
+    }
+    function setUnpublished(flag) {
+      const b = $("#publish");
+      b.querySelector(".dot")?.remove();
+      if (flag) b.insertAdjacentHTML("beforeend", '<span class="dot" title="有已保存但还没发布的修改">!</span>');
+    }
+
+    /* ---------- filtering ---------- */
+    function applyFilter() {
+      const q = $("#q").value.trim().toLowerCase();
+      const alb = $("#album-filter").value;
+      let shown = 0;
+      main.querySelectorAll(".album").forEach((sec) => {
+        const k = sec.dataset.album;
+        const a = work.albums[k];
+        const albumText = [k, txt(a.title, "en"), txt(a.title, "zh"), txt(a.place, "en"), txt(a.place, "zh")].join(" ").toLowerCase();
+        let any = 0;
+        sec.querySelectorAll(".card").forEach((el) => {
+          const it = byId.get(el.dataset.id);
+          const text = [it.id, txt(it.title, "en"), txt(it.title, "zh"), txt(it.place, "en"), txt(it.place, "zh")].join(" ").toLowerCase();
+          let ok = (!alb || alb === k) && (!q || text.includes(q) || albumText.includes(q));
+          if (ok && view === "changed") ok = itemChanged(it) || albumChanged(k);
+          if (ok && view === "featured") ok = !!it.featured;
+          if (ok && view === "hidden") ok = !!it.hidden;
+          el.hidden = !ok;
+          if (ok) { any++; shown++; }
+        });
+        sec.hidden = !any;
+      });
+      $("#none").hidden = shown > 0;
+      $("#count").textContent = `显示 ${shown} / ${work.items.length} 张 · 网站上可见 ${work.items.filter((i) => !i.hidden).length} 张`;
+    }
+
+    /* ---------- edits ---------- */
+    main.addEventListener("input", (e) => {
+      const inp = e.target.closest("input[data-s]");
+      if (!inp) return;
+      const { s, k, f, l } = inp.dataset;
+      const obj = s === "album" ? work.albums[k] : byId.get(k);
+      obj[f] = { en: txt(obj[f], "en"), zh: txt(obj[f], "zh"), [l]: inp.value };
+      markInput(inp);
+      if (s === "item") markCard(k);
+      if (s === "album" && f === "place") updatePlaceholders(k);
+      updateState();
+    });
+    main.addEventListener("click", (e) => {
+      const tg = e.target.closest(".tg");
+      if (tg) {
+        const id = tg.closest(".card").dataset.id;
+        const it = byId.get(id);
+        if (tg.dataset.t === "hidden") {
+          if (it.hidden) delete it.hidden; else it.hidden = true;
+        } else if (it.featured) {
+          delete it.featured;
+        } else { // keep its old rank if it had one, otherwise it goes to the end of the featured list
+          it.featured = savedById.get(id).featured || Math.max(0, ...work.items.map((i) => i.featured || 0)) + 1;
+        }
+        markCard(id);
+        updateState();
+        return;
+      }
+      const pk = e.target.closest("[data-peek]");
+      if (pk) {
+        const it = byId.get(pk.dataset.peek);
+        $("#peek-img").src = "../" + it.src;
+        $("#peek-cap").textContent = `${it.id} · ${txt(it.title, "zh")} / ${txt(it.title, "en")}`;
+        $("#peek").hidden = false;
+      }
+    });
+    $("#peek").addEventListener("click", () => { $("#peek").hidden = true; });
+
+    /* ---------- save / publish ---------- */
+    function normalized() {
+      const out = clone(work);
+      const fix = (v) => {
+        const en = txt(v, "en").trim(), zh = txt(v, "zh").trim();
+        return en || zh ? { en: en || zh, zh: zh || en } : null;
+      };
+      for (const k of albumKeys) {
+        const a = out.albums[k];
+        const t = fix(a.title);
+        if (!t) throw new Error(`相册 ${k} 的名字不能是空的`);
+        a.title = t;
+        const p = fix(a.place);
+        if (p) a.place = p; else delete a.place;
+      }
+      for (const it of out.items) {
+        const t = fix(it.title);
+        if (!t) throw new Error(`照片 ${it.id} 的标题不能是空的`);
+        it.title = t;
+        const p = fix(it.place);
+        if (p) it.place = p; else delete it.place;
+        if (it.hidden) it.hidden = true; else delete it.hidden;
+        if (!it.featured) delete it.featured;
+      }
+      return out;
+    }
+    function syncInputs() {
+      main.querySelectorAll("input[data-s]").forEach((inp) => {
+        const { s, k, f, l } = inp.dataset;
+        inp.value = txt((s === "album" ? work.albums[k] : byId.get(k))[f], l);
+        inp.classList.remove("changed");
+      });
+      work.items.forEach((it) => markCard(it.id));
+      albumKeys.forEach(updatePlaceholders);
+    }
+    function afterSave(out) {
+      saved = clone(out);
+      work = clone(out);
+      index();
+      syncInputs();
+      updateState();
+      applyFilter();
+    }
+    async function save() {
+      let out;
+      try { out = normalized(); } catch (err) { toast(err.message, true); return false; }
+      if (server) {
+        let j;
+        try { j = await api("/api/save", out); } catch (err) { j = { ok: false, error: err.message }; }
+        if (!j.ok) { toast("保存失败：" + (j.error || "未知错误"), true); return false; }
+        afterSave(out);
+        setUnpublished(j.unpublished);
+        toast(j.changed ? `已保存到 js/photos.js（${j.changed} 处修改）` : "没有需要保存的修改");
+        return true;
+      }
+      const text = HEADER + "window.PHOTOS = " + JSON.stringify(out, null, 1) + ";\n";
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(new Blob([text], { type: "text/javascript" }));
+      a.download = "photos.js";
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+      afterSave(out);
+      showLog("已下载新的 photos.js", "离线模式没法直接写入项目文件。\n请用刚下载的 photos.js 替换项目里的 js/photos.js，\n然后提交并推送到 GitHub（或者告诉 Claude「推送一下」）。\n\n下次可以双击 tools\\open-photo-editor.bat 打开编辑器，就能直接保存和发布。");
+      return true;
+    }
+    async function publish() {
+      if (!server) return;
+      if (changes() > 0 && !(await save())) return;
+      const b = $("#publish");
+      b.disabled = true;
+      b.firstChild.textContent = "发布中…";
+      let j;
+      try { j = await api("/api/publish"); } catch (err) { j = { ok: false, output: err.message }; }
+      b.disabled = false;
+      b.firstChild.textContent = "发布上线";
+      setUnpublished(j.unpublished);
+      showLog(j.ok ? "✅ 发布成功" : "❌ 发布失败",
+        (j.ok ? "网站大约 1 分钟后更新：https://juice-zhi.github.io/#darkroom\n\n" : "") + (j.output || j.error || ""));
+    }
+    function revert() {
+      if (!confirm("撤销所有还没保存的修改？")) return;
+      work = clone(saved);
+      index();
+      syncInputs();
+      updateState();
+      applyFilter();
+    }
+
+    /* ---------- ui bits ---------- */
+    let toastTimer;
+    function toast(msg, err) {
+      const el = $("#toast");
+      el.textContent = msg;
+      el.classList.toggle("err", !!err);
+      el.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => el.classList.remove("show"), err ? 5200 : 3000);
+    }
+    function showLog(title, text) {
+      $("#log-title").textContent = title;
+      $("#log-out").textContent = text;
+      $("#log").hidden = false;
+      $("#log-close").focus();
+    }
+    $("#log-close").addEventListener("click", () => { $("#log").hidden = true; });
+    $("#save").addEventListener("click", save);
+    $("#publish").addEventListener("click", publish);
+    $("#revert").addEventListener("click", revert);
+    $("#q").addEventListener("input", applyFilter);
+    $("#album-filter").addEventListener("change", applyFilter);
+    $("#view").addEventListener("click", (e) => {
+      const b = e.target.closest("button[data-v]");
+      if (!b) return;
+      view = b.dataset.v;
+      $("#view").querySelectorAll("button").forEach((x) => x.classList.toggle("on", x === b));
+      applyFilter();
+    });
+    window.addEventListener("keydown", (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "s") { e.preventDefault(); if (changes()) save(); }
+      if (e.key === "Escape") { $("#peek").hidden = true; $("#log").hidden = true; }
+    });
+    window.addEventListener("beforeunload", (e) => { if (changes()) { e.preventDefault(); e.returnValue = ""; } });
+
+    /* ---------- start ---------- */
+    render();
+    updateState();
+    applyFilter();
+    (async () => {
+      if (location.protocol.startsWith("http") && token) {
+        try { const j = await api("/api/ping"); server = !!j.ok; setUnpublished(j.unpublished); } catch (_) { server = false; }
+      }
+      const mode = $("#mode");
+      mode.className = "mode " + (server ? "ok" : "off");
+      mode.textContent = server ? "● 已连接：保存直接写入 js/photos.js，可一键发布" : "● 离线模式：保存会下载 photos.js";
+      mode.title = server ? "" : "双击项目里的 tools\\open-photo-editor.bat 打开编辑器，就能直接保存和发布";
+      const pub = $("#publish");
+      pub.disabled = !server;
+      pub.title = server ? "提交并推送 js/photos.js，网站约 1 分钟后更新" : "离线模式不能发布：请用 tools\\open-photo-editor.bat 打开";
+    })();
+  })();
+  </script>
+</body>
+</html>
